@@ -10,19 +10,19 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['DM Serif Display', 'Inter', 'system-ui', 'sans-serif'],
       },
-      colors: {
-        coffee: {
-          50: '#FAF6F1',   // foam
-          100: '#F5EDE4',  // cream
-          200: '#E8DDD4',  // latte
-          300: '#C4A77D',  // light roast
-          400: '#8B6914',  // caramel
-          500: '#6F4E37',  // mocha
-          600: '#5C4033',  // medium roast
-          700: '#4A3528',  // dark roast
-          800: '#3D2817',  // espresso
-          900: '#2C1810',  // black coffee
+      keyframes: {
+        'orbit-3d': {
+          '0%': { transform: 'rotateX(55deg) rotateY(0deg) translateZ(5.5rem)' },
+          '100%': { transform: 'rotateX(55deg) rotateY(360deg) translateZ(5.5rem)' },
         },
+        'orbit-counter': {
+          '0%': { transform: 'rotateY(0deg)' },
+          '100%': { transform: 'rotateY(-360deg)' },
+        },
+      },
+      animation: {
+        'orbit-3d': 'orbit-3d 25s linear infinite',
+        'orbit-counter': 'orbit-counter 25s linear infinite',
       },
     },
   },

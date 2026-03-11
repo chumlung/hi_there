@@ -16,13 +16,12 @@ Driven individual with the ability to build codebase from scratch or adapt and c
 
 export const skills = {
   'Languages': ['JavaScript (ES6+)', 'TypeScript'],
-  'Frameworks & Libraries': ['React', 'Redux', 'Webpack', 'Node.js', 'Electron', 'Angular', 'NestJS', 'Next.js', 'Highcharts', 'D3.js'],
-  'UI/UX & Styling': ['Design Systems', 'HTML5', 'CSS3', 'Figma'],
-  'Testing & Quality': ['Code Review', 'Unit Testing', 'Integration Testing', 'Storybook', 'Mocha', 'Chai', 'Jest', 'Sentry', 'SonarQube'],
-  'Database': ['MySQL', 'PostgreSQL', 'MongoDB'],
+  'Frameworks & Libraries': ['React', 'Node.js', 'NestJS', 'Next.js'],
+  'UI/UX & Styling': ['HTML5', 'CSS3', 'Figma', 'Tailwind'],
+  'Testing & Quality': ['Mocha', 'Chai', 'Jest', 'Sentry', 'SonarQube'],
+  'Database': ['PostgreSQL'],
   'Infrastructure': ['Docker', 'Kubernetes', 'AWS EC2', 'ECS', 'S3', 'Lambda', 'SQS', 'SNS', 'RDS'],
-  'CI/CD & Tools': ['Jenkins', 'Travis', 'GitHub Actions', 'Git', 'GitHub', 'JIRA', 'Slack'],
-  'Methodology': ['Scrum', 'Kanban'],
+  'CI/CD & Tools': ['Jenkins', 'Travis', 'GitHub Actions', 'Git', 'GitHub'],
 }
 
 export const projects = [

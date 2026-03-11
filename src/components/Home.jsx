@@ -8,7 +8,7 @@ import Contact from './Contact'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-coffee-50">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
       <main>
         <Hero />
