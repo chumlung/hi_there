@@ -1,34 +1,63 @@
-export default function Navbar() {
-  const links = [
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#blogs', label: 'Blogs' },
-    { href: '#contact', label: 'Contact' },
-  ]
+const NAV_LINKS = [
+  { href: "#about", id: "about", label: "About" },
+  { href: "#skills", id: "skills", label: "Skills" },
+  { href: "#projects", id: "projects", label: "Projects" },
+  { href: "#blogs", id: "blogs", label: "Blogs" },
+  { href: "#contact", id: "contact", label: "Contact" },
+];
 
+const LINE_COLOR = "#1e3a8a"; // blue-900
+
+export default function Navbar({
+  activeSection,
+  sectionProgress = {},
+  onNavigate,
+}) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-200/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
-        <a
-          href="#"
-          className="font-display text-lg sm:text-xl text-slate-900 hover:text-blue-600 transition-colors shrink-0"
-        >
-          CL
-        </a>
-        <ul className="flex gap-3 sm:gap-5 md:gap-8 flex-1 justify-end min-w-0">
-          {links.map(({ href, label }) => (
-            <li key={href} className="shrink-0">
+    <nav
+      className="hidden md:flex flex-col items-start justify-center h-full"
+      aria-label="Main navigation"
+    >
+      <a
+        href="#"
+        className="font-display text-4xl text-slate-900 hover:text-blue-700 transition-colors mb-6"
+        aria-label="Home"
+        onClick={(event) => {
+          event.preventDefault();
+          onNavigate?.("hero");
+        }}
+      >
+        CL
+      </a>
+
+      <ul className="flex flex-col gap-6">
+        {NAV_LINKS.map(({ href, id, label }) => {
+          const progress = sectionProgress[id] ?? 0;
+          const isActive = activeSection === id;
+
+          return (
+            <li key={href} className="relative">
               <a
                 href={href}
-                className="text-[11px] sm:text-xs md:text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors whitespace-nowrap"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate?.(id);
+                }}
+                className={`relative inline-block text-lg font-semibold whitespace-nowrap transition-colors py-0.5 ${
+                  isActive ? "text-blue-700" : "text-slate-800 hover:text-blue-600"
+                }`}
               >
                 {label}
+                <span
+                  className="absolute left-0 bottom-0 h-[2px] bg-blue-900 transition-all duration-300 ease-out origin-left"
+                  style={{ width: `${progress * 100}%` }}
+                  aria-hidden
+                />
               </a>
             </li>
-          ))}
-        </ul>
-      </div>
+          );
+        })}
+      </ul>
     </nav>
-  )
+  );
 }

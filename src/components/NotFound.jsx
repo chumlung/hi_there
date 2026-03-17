@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
@@ -13,8 +13,8 @@ export default function NotFound() {
         to="/"
         className="px-6 py-3 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-500 transition-colors"
       >
-        Click Me!
+        Take me home
       </Link>
     </div>
-  )
+  );
 }

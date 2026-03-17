@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import NotFound from './components/NotFound'
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;
