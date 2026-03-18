@@ -13,6 +13,8 @@ export default function Navbar({
   sectionProgress = {},
   onNavigate,
 }) {
+  const isHeroActive = activeSection == null;
+
   return (
     <nav
       className="hidden md:flex flex-col items-start justify-center h-full"
@@ -20,8 +22,11 @@ export default function Navbar({
     >
       <a
         href="#"
-        className="font-display text-4xl text-slate-900 hover:text-blue-700 transition-colors mb-6"
+        className={`font-display text-4xl transition-colors mb-6 ${
+          isHeroActive ? "text-blue-700" : "text-slate-900 hover:text-blue-700"
+        }`}
         aria-label="Home"
+        aria-current={isHeroActive ? "page" : undefined}
         onClick={(event) => {
           event.preventDefault();
           onNavigate?.("hero");
@@ -30,7 +35,7 @@ export default function Navbar({
         CL
       </a>
 
-      <ul className="flex flex-col gap-6">
+      <ul className="flex flex-col gap-2">
         {NAV_LINKS.map(({ href, id, label }) => {
           const progress = sectionProgress[id] ?? 0;
           const isActive = activeSection === id;

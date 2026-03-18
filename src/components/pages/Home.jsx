@@ -9,21 +9,23 @@ import Contact from "@sections/contact";
 
 const SECTION_IDS = ["about", "skills", "projects", "blogs", "contact"];
 const TRACK_IDS = ["hero", ...SECTION_IDS];
+const PROJECTS_INDEX = 3;
+const PROJECTS_STACK_SCROLL_SPAN = 1.7;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
 function mapVirtualToSectionPosition(virtualIndex) {
-  // Extra virtual segment between "projects" and "blogs" to lock scroll
-  // while the projects card stack animates.
-  if (virtualIndex <= 3) {
+  // Reserve extra virtual space between "projects" and "blogs" to keep
+  // projects visible while the stack animates.
+  if (virtualIndex <= PROJECTS_INDEX) {
     return virtualIndex;
   }
-  if (virtualIndex < 4) {
-    return 3;
+  if (virtualIndex < PROJECTS_INDEX + PROJECTS_STACK_SCROLL_SPAN) {
+    return PROJECTS_INDEX;
   }
-  return virtualIndex - 1;
+  return virtualIndex - (PROJECTS_STACK_SCROLL_SPAN - 1);
 }
 
 function computeRatios(position) {
@@ -63,7 +65,8 @@ export default function Home() {
   const touchStartYRef = useRef(null);
 
   useEffect(() => {
-    const maxIndex = TRACK_IDS.length; // one extra virtual step for projects stack
+    const maxIndex =
+      TRACK_IDS.length - 1 + (PROJECTS_STACK_SCROLL_SPAN - 1);
 
     const handleWheel = (event) => {
       event.preventDefault();
@@ -113,7 +116,11 @@ export default function Home() {
   const handleNavigate = useCallback((id) => {
     const index = TRACK_IDS.indexOf(id);
     if (index === -1) return;
-    setVirtualIndex(index);
+    const virtualTarget =
+      index <= PROJECTS_INDEX
+        ? index
+        : index + (PROJECTS_STACK_SCROLL_SPAN - 1);
+    setVirtualIndex(virtualTarget);
     setRatios(computeRatios(index));
   }, []);
 
@@ -126,7 +133,11 @@ export default function Home() {
   };
 
   const sectionPosition = mapVirtualToSectionPosition(virtualIndex);
-  const projectsStackProgress = clamp(virtualIndex - 3, 0, 1);
+  const projectsStackProgress = clamp(
+    (virtualIndex - PROJECTS_INDEX) / PROJECTS_STACK_SCROLL_SPAN,
+    0,
+    1,
+  );
 
   const heroRatio = ratios.hero ?? 1;
   const rawActiveSection = getActiveSection(ratios);

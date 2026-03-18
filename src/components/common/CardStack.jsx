@@ -9,14 +9,30 @@ export default function CardStack({
 }) {
   const items = Array.isArray(children) ? children : [children];
   const totalCards = items.length;
-  const cardsProgress = stackProgress * totalCards;
 
-  const visiblePeeks = Math.min(totalCards - 1, 4);
+  if (totalCards === 0) {
+    return null;
+  }
+
+  const maxVisibleCards = 4;
+  const totalTransitions = Math.max(totalCards - 1, 1);
+  const normalizedProgress = Math.max(0, Math.min(stackProgress, 1));
+  const cardsProgress = normalizedProgress * totalTransitions;
+
+  const visiblePeeks = Math.min(totalCards - 1, maxVisibleCards - 1);
   const peekSize = stackOffset - heightStep;
   const containerHeight = cardHeight + visiblePeeks * peekSize;
 
-  const currentTop = Math.floor(cardsProgress);
-  const frac = cardsProgress - currentTop;
+  const currentTop = Math.min(Math.floor(cardsProgress), totalCards - 1);
+  const frac = currentTop >= totalCards - 1 ? 0 : cardsProgress - currentTop;
+
+  const getSlotGeometry = (slot) => ({
+    width: cardWidth - slot * widthStep,
+    height: cardHeight - slot * heightStep,
+    y: 2 + slot * stackOffset,
+  });
+
+  const topExitDistance = cardHeight + stackOffset;
 
   return (
     <div className="relative h-full flex items-center justify-center">
@@ -29,52 +45,54 @@ export default function CardStack({
         }}
       >
         {items.map((child, index) => {
-          const localProgress = cardsProgress - index;
-          const clampedLocal = Math.max(0, Math.min(1, localProgress));
+          const relativeIndex = index - currentTop;
 
-          if (localProgress >= 1.05) {
+          // Keep only a 4-card stack visible:
+          // - top card exiting (slot 0)
+          // - cards in slots 1..3 move to 0..2
+          // - next card crossfades into slot 3
+          if (relativeIndex < 0 || relativeIndex > maxVisibleCards) {
             return null;
           }
 
-          const isTopCard = index === currentTop;
-          const isExiting = isTopCard && frac > 0;
-          const isNextUp = index === currentTop + 1;
+          const isTopCard = relativeIndex === 0;
+          const isIncomingBottom = relativeIndex === maxVisibleCards;
 
-          const homeY = 2 + index * stackOffset;
-          const homeWidth = cardWidth - index * widthStep;
-          const homeHeight = cardHeight - index * heightStep;
-          const topY = 2;
+          let renderWidth = cardWidth;
+          let renderHeight = cardHeight;
+          let translateY = 2;
+          let opacity = 1;
+          let slotForShading = 0;
 
-          let renderWidth, renderHeight, renderY;
-
-          if (index <= currentTop) {
-            renderWidth = cardWidth;
-            renderHeight = cardHeight;
-            renderY = topY;
-          } else if (isNextUp) {
-            renderWidth = homeWidth + frac * (cardWidth - homeWidth);
-            renderHeight = homeHeight + frac * (cardHeight - homeHeight);
-            renderY = homeY + frac * (topY - homeY);
+          if (isTopCard) {
+            const slot0 = getSlotGeometry(0);
+            renderWidth = slot0.width;
+            renderHeight = slot0.height;
+            translateY = slot0.y - frac * topExitDistance;
+            opacity = 1 - frac;
+          } else if (isIncomingBottom) {
+            const bottomSlot = getSlotGeometry(maxVisibleCards - 1);
+            renderWidth = bottomSlot.width;
+            renderHeight = bottomSlot.height;
+            translateY = bottomSlot.y;
+            opacity = frac;
+            slotForShading = maxVisibleCards - 1;
           } else {
-            renderWidth = homeWidth;
-            renderHeight = homeHeight;
-            renderY = homeY;
+            const fromSlot = getSlotGeometry(relativeIndex);
+            const toSlot = getSlotGeometry(relativeIndex - 1);
+
+            renderWidth = fromSlot.width + frac * (toSlot.width - fromSlot.width);
+            renderHeight =
+              fromSlot.height + frac * (toSlot.height - fromSlot.height);
+            translateY = fromSlot.y + frac * (toSlot.y - fromSlot.y);
+            slotForShading = relativeIndex - frac;
           }
 
-          const exitTranslation = clampedLocal * (cardHeight + stackOffset);
-          const translateY = renderY - exitTranslation;
+          const darkenOpacity = isTopCard
+            ? 0
+            : Math.min(slotForShading * 0.12, 0.5) * opacity;
 
-          const darkenOpacity =
-            index <= currentTop
-              ? 0
-              : isNextUp
-                ? Math.min((1 - frac) * index * 0.12, 0.5)
-                : Math.min(index * 0.12, 0.5);
-
-          const opacity =
-            clampedLocal <= 0.5 ? 1 : 1 - (clampedLocal - 0.5) * 2;
-
-          const shouldAnimate = isExiting || isNextUp || isTopCard;
+          const shouldAnimate = isTopCard || relativeIndex <= maxVisibleCards;
 
           return (
             <div
@@ -82,7 +100,7 @@ export default function CardStack({
               className={`absolute rounded-3xl overflow-hidden border px-6 py-5 ${
                 shouldAnimate ? "transition-all duration-300 ease-out" : ""
               } ${
-                isTopCard || isNextUp
+                isTopCard || relativeIndex === 1
                   ? "border-slate-200 bg-white shadow-2xl"
                   : "border-slate-300 bg-slate-50 shadow-md"
               }`}
@@ -91,7 +109,7 @@ export default function CardStack({
                 transform: `translateX(-50%) translateY(${translateY}px)`,
                 width: `${renderWidth}px`,
                 height: `${renderHeight}px`,
-                zIndex: totalCards - index,
+                zIndex: isTopCard ? totalCards + 5 : totalCards - (relativeIndex - 1),
                 opacity,
                 pointerEvents: isTopCard ? "auto" : "none",
               }}

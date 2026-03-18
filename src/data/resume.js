@@ -211,69 +211,69 @@ export const projects = [
   siteUrl: "https://phil.us/",
   description: "An initiative to create a marketing site which can dynamically change its theme and user journey for a patient, based on the URLs provided to them by Phil’s health care provider partners.",
   keyContributions: [
-    {
-      title: "Architected a highly configurable Next.js application using Orchestrator - component registry pattern, driven by JSON configuration files tailored for each client individually, enabling rapid, per-client dynamic theming.",
-      highlightPhrases: ["Architected", "Orchestrator - component registry pattern", "rapid", "per-client dynamic theming"],
-    }
-  ]
-},
-{
-  name: "Inpart Assess",
-  roles: ["Team Lead", "Full Stack Engineer"],
-  industryDomain: "Healthcare",
-  siteUrl: "https://inpart.io/",
-  description: "A module within Inpart’s existing system, focused on building assessments surveys, shared via URLs with participants within and outside the organization.",
-  keyContributions: [
-    {
-      title: "Established a standalone module within the existing microservices architecture, enabling its independent deployment, tech stack and database.",
-      highlightPhrases: ["standalone module", "microservices architecture", "independent deployment", "tech stack and database"],
-    },
-    {
-      title: "Built a secure, stateful authentication mechanism for users participating in the survey without user login required, resulting in convenient survey link distribution and participation.",
-      highlightPhrases: ["Built", "secure", "stateful authentication mechanism", "convenient survey link distribution and participation"],
-    },
-    {
-      title: "Saved the DevOps team an estimated 1 week by implementing runtime configuration file strategy for the Vite-built application.",
-      highlightPhrases: ["Saved the DevOps", "1 week", "implementing runtime configuration file strategy"],
-    }
-  ]
-},
-{
-  name: "GoLend",
-  roles: ["Team Lead", "Full Stack Engineer"],
-  industryDomain: "FinTech",
-  siteUrl: "https://www.golend.co.nz/",
-  description: "A peer to peer marketplace which matches those looking to invest with those looking to borrow.",
-  keyContributions: [
-    {
-      title: "Implemented service-repository pattern for cleaner, maintainable service layer functions handling complex fintech domain business needs with meticulous unit tests for all critical services, resulting in 90% test coverage.",
-      highlightPhrases: ["Implemented service-repository pattern", "cleaner", "maintainable", "meticulous unit tests", "90% test coverage"],
-    },
-    {
-      title: "Analyzed the marketing site performance with Lighthouse, refactored codebase to remove unused Javascript code, scripts and increased the site performance by 30%.",
-      highlightPhrases: ["markteing site performance", "Lighthouse", "refactored codebase", "increased the site performance by 30%"],
-    },
-    {
-      title: "Devised the disaster recovery plan at the database layer achieving Recover Point Objective of 5 minutes.",
-      highlightPhrases: ["Devised", "disaster recovery plan", "achieving Recover Point Objective of 5 minutes"],
-    },
-  ]
-},
-{
-  name: "Soliish",
-  roles: ["Team Lead", "Full Stack Engineer"],
-  industryDomain: "Healthcare",
-  siteUrl: "https://www.soliish.com/",
-  description: "A project to detecting Sleep Apnea on patients based on facial features of users and their answers to survey questions.",
-  keyContributions: [
-    {
-      title: "Architected a multi-tenant database system with a shared-database, separate-schema approach to strike the right balance between cost, security and complexity. ",
-      highlightPhrases: ["Architected", "multi-tenant", "shared-database, separate-schema approach", "cost, security and complexity"],
-    },
-    {
-      title: "Built Role-based access control system capable of customizing authorization of minute levels of permissions.",
-      highlightPhrases: ["Built", "Role-based access control system", "authorization of minute levels of permissions"],
-    }
-  ]
-}
+      {
+        title: "Architected a highly configurable Next.js application using Orchestrator - component registry pattern, driven by JSON configuration files tailored for each client individually, enabling rapid, per-client dynamic theming.",
+        highlightPhrases: ["Architected", "Orchestrator - component registry pattern", "rapid", "per-client dynamic theming"],
+      }
+    ]
+  },
+  {
+    name: "Inpart Assess",
+    roles: ["Team Lead", "Full Stack Engineer"],
+    industryDomain: "Healthcare",
+    siteUrl: "https://inpart.io/",
+    description: "A module within Inpart’s existing system, focused on building assessments surveys, shared via URLs with participants within and outside the organization.",
+    keyContributions: [
+      {
+        title: "Established a standalone module within the existing microservices architecture, enabling its independent deployment, tech stack and database.",
+        highlightPhrases: ["standalone module", "microservices architecture", "independent deployment", "tech stack and database"],
+      },
+      {
+        title: "Built a secure, stateful authentication mechanism for users participating in the survey without user login required, resulting in convenient survey link distribution and participation.",
+        highlightPhrases: ["Built", "secure", "stateful authentication mechanism", "convenient survey link distribution and participation"],
+      },
+      {
+        title: "Saved the DevOps team an estimated 1 week by implementing runtime configuration file strategy for the Vite-built application.",
+        highlightPhrases: ["Saved the DevOps", "1 week", "implementing runtime configuration file strategy"],
+      }
+    ]
+  },
+  {
+    name: "GoLend",
+    roles: ["Team Lead", "Full Stack Engineer"],
+    industryDomain: "FinTech",
+    siteUrl: "https://www.golend.co.nz/",
+    description: "A peer to peer marketplace which matches those looking to invest with those looking to borrow.",
+    keyContributions: [
+      {
+        title: "Implemented service-repository pattern for cleaner, maintainable service layer functions handling complex fintech domain business needs with meticulous unit tests for all critical services, resulting in 90% test coverage.",
+        highlightPhrases: ["Implemented service-repository pattern", "cleaner", "maintainable", "meticulous unit tests", "90% test coverage"],
+      },
+      {
+        title: "Analyzed the marketing site performance with Lighthouse, refactored codebase to remove unused Javascript code, scripts and increased the site performance by 30%.",
+        highlightPhrases: ["markteing site performance", "Lighthouse", "refactored codebase", "increased the site performance by 30%"],
+      },
+      {
+        title: "Devised the disaster recovery plan at the database layer achieving Recover Point Objective of 5 minutes.",
+        highlightPhrases: ["Devised", "disaster recovery plan", "achieving Recover Point Objective of 5 minutes"],
+      },
+    ]
+  },
+  {
+    name: "Soliish",
+    roles: ["Team Lead", "Full Stack Engineer"],
+    industryDomain: "Healthcare",
+    siteUrl: "https://www.soliish.com/",
+    description: "A project to detecting Sleep Apnea on patients based on facial features of users and their answers to survey questions.",
+    keyContributions: [
+      {
+        title: "Architected a multi-tenant database system with a shared-database, separate-schema approach to strike the right balance between cost, security and complexity. ",
+        highlightPhrases: ["Architected", "multi-tenant", "shared-database, separate-schema approach", "cost, security and complexity"],
+      },
+      {
+        title: "Built Role-based access control system capable of customizing authorization of minute levels of permissions.",
+        highlightPhrases: ["Built", "Role-based access control system", "authorization of minute levels of permissions"],
+      }
+    ]
+  },
 ];

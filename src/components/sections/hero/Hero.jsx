@@ -6,12 +6,14 @@ export default function Hero({ ratio = 1, offset = 0 }) {
   const left = (
     <div className="flex flex-col items-start text-left max-w-2xl">
       <p className="text-sm sm:text-base md:text-lg text-slate-700 mb-4 sm:mb-6">
-        Hi, I&apos;m Chumlung. Nice to meet you.
+        Hi, I&apos;m <span className="text-blue-700">Chumlung</span>. Nice to meet you.
       </p>
       <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-slate-900 leading-tight mb-3 sm:mb-4">
         <span className="block text-slate-700">I love building products</span>
         <span className="block text-blue-700">
-          users love and developers enjoy maintaining.
+          users love
+          <span className="block text-slate-700">&</span>
+          developers enjoy maintaining.
         </span>
       </h1>
     </div>
