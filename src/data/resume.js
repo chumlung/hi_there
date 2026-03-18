@@ -206,7 +206,7 @@ export const skills = [
 export const projects = [
 {
   name: "Phil",
-  roles: ["Front End Architect"],
+  roles: ["Front End Engineer"],
   industryDomain: "Healthcare",
   siteUrl: "https://phil.us/",
   description: "An initiative to create a marketing site which can dynamically change its theme and user journey for a patient, based on the URLs provided to them by Phil’s health care provider partners.",

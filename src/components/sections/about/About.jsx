@@ -11,9 +11,10 @@ export default function About({ ratio = 0, offset = 0 }) {
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
       </div>
       <div className="text-slate-800 text-sm sm:text-base leading-relaxed space-y-4">
-        <p>I am a full stack engineer from the mountains of Nepal, starting my journey in 2018. And oddly, I am more of a beach person.</p>
-          <p className="text-blue-700 font-semibold">To me, &apos;done&apos; means
-          I treat every feature as a long-term investment. 
+        <p>I am a full stack engineer from the mountains of Nepal, starting my journey in 2018. And oddly-I am more of a beach person.</p>
+          <p className="text-blue-700 font-semibold">
+          I treat every feature as a long-term investment. <br />
+          To me, &apos;done&apos; means
           it&apos;s secure, resilient against edge cases, and—most
           importantly—clean for the next developer to pick up without a
           headache.</p> 
@@ -24,9 +25,9 @@ export default function About({ ratio = 0, offset = 0 }) {
   const right = (
     <div className="flex items-center justify-center">
       <img
-        src={`${baseUrl}about-hero.png`}
-        alt="Developer working on a laptop with mountain view"
-        className="max-h-[260px] w-auto rounded-2xl object-contain"
+        src={`${baseUrl}laptop_mountain.png`}
+        alt="Laptop with mountain view"
+        className="max-h-[300px] w-auto rounded-2xl object-contain"
       />
     </div>
   );
