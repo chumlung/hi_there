@@ -1,17 +1,29 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import Navbar from "./Navbar";
-import Hero from "./Hero";
-import About from "./About";
-import Skills from "./Skills";
-import Projects from "./Projects";
-import Blogs from "./Blogs";
-import Contact from "./Contact";
+import Navbar from "@sections/navbar";
+import Hero from "@sections/hero";
+import About from "@sections/about";
+import Skills from "@sections/skills";
+import Projects from "@sections/projects";
+import Blogs from "@sections/blogs";
+import Contact from "@sections/contact";
 
 const SECTION_IDS = ["about", "skills", "projects", "blogs", "contact"];
 const TRACK_IDS = ["hero", ...SECTION_IDS];
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function mapVirtualToSectionPosition(virtualIndex) {
+  // Extra virtual segment between "projects" and "blogs" to lock scroll
+  // while the projects card stack animates.
+  if (virtualIndex <= 3) {
+    return virtualIndex;
+  }
+  if (virtualIndex < 4) {
+    return 3;
+  }
+  return virtualIndex - 1;
 }
 
 function computeRatios(position) {
@@ -51,7 +63,7 @@ export default function Home() {
   const touchStartYRef = useRef(null);
 
   useEffect(() => {
-    const maxIndex = TRACK_IDS.length - 1;
+    const maxIndex = TRACK_IDS.length; // one extra virtual step for projects stack
 
     const handleWheel = (event) => {
       event.preventDefault();
@@ -60,7 +72,8 @@ export default function Home() {
 
       setVirtualIndex((prev) => {
         const next = clamp(prev + step, 0, maxIndex);
-        setRatios(computeRatios(next));
+        const sectionPosition = mapVirtualToSectionPosition(next);
+        setRatios(computeRatios(sectionPosition));
         return next;
       });
     };
@@ -78,7 +91,8 @@ export default function Home() {
 
       setVirtualIndex((prev) => {
         const next = clamp(prev + step, 0, maxIndex);
-        setRatios(computeRatios(next));
+        const sectionPosition = mapVirtualToSectionPosition(next);
+        setRatios(computeRatios(sectionPosition));
         return next;
       });
 
@@ -111,15 +125,18 @@ export default function Home() {
     contact: ratios.contact ?? 0,
   };
 
+  const sectionPosition = mapVirtualToSectionPosition(virtualIndex);
+  const projectsStackProgress = clamp(virtualIndex - 3, 0, 1);
+
   const heroRatio = ratios.hero ?? 1;
   const rawActiveSection = getActiveSection(ratios);
   const activeSection = (heroRatio ?? 0) >= 0.6 ? null : rawActiveSection;
-  const heroOffset = 0 - virtualIndex;
-  const aboutOffset = 1 - virtualIndex;
-  const skillsOffset = 2 - virtualIndex;
-  const projectsOffset = 3 - virtualIndex;
-  const blogsOffset = 4 - virtualIndex;
-  const contactOffset = 5 - virtualIndex;
+  const heroOffset = 0 - sectionPosition;
+  const aboutOffset = 1 - sectionPosition;
+  const skillsOffset = 2 - sectionPosition;
+  const projectsOffset = 3 - sectionPosition;
+  const blogsOffset = 4 - sectionPosition;
+  const contactOffset = 5 - sectionPosition;
 
   return (
     <div className="h-screen bg-white overflow-hidden">
@@ -135,7 +152,11 @@ export default function Home() {
           <Hero ratio={heroRatio} offset={heroOffset} />
           <About ratio={sectionProgress.about} offset={aboutOffset} />
           <Skills ratio={sectionProgress.skills} offset={skillsOffset} />
-          <Projects ratio={sectionProgress.projects} offset={projectsOffset} />
+          <Projects
+            ratio={sectionProgress.projects}
+            offset={projectsOffset}
+            stackProgress={projectsStackProgress}
+          />
           <Blogs ratio={sectionProgress.blogs} offset={blogsOffset} />
           <Contact ratio={sectionProgress.contact} offset={contactOffset} />
         </main>

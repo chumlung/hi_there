@@ -1,5 +1,5 @@
-import { blogPosts } from "../data/blogPlaceholders";
-import SectionWrapper from "./SectionWrapper";
+import { blogPosts } from "@src/data/blogPlaceholders";
+import SectionWrapper from "@components/common/SectionWrapper";
 
 export default function Blogs({ ratio = 0, offset = 0 }) {
   const left = (

@@ -2,8 +2,6 @@
 
 export const profile = {
   name: "Chumlung Nip Khoyahang Limbu",
-  title: "Senior Full Stack Engineer",
-  tagline: "Full Stack Engineer & Technical Leader",
 };
 
 export const social = {
@@ -235,7 +233,7 @@ export const projects = [
       highlightPhrases: ["Built", "secure", "stateful authentication mechanism", "convenient survey link distribution and participation"],
     },
     {
-      title: "Saved the DevOps team an estimated 1 week by implementing runtime configuration file strategy for the Vite Front-end application.",
+      title: "Saved the DevOps team an estimated 1 week by implementing runtime configuration file strategy for the Vite-built application.",
       highlightPhrases: ["Saved the DevOps", "1 week", "implementing runtime configuration file strategy"],
     }
   ]
@@ -259,10 +257,6 @@ export const projects = [
       title: "Devised the disaster recovery plan at the database layer achieving Recover Point Objective of 5 minutes.",
       highlightPhrases: ["Devised", "disaster recovery plan", "achieving Recover Point Objective of 5 minutes"],
     },
-    {
-      title: "Mandated demo meetings with the product’s admin team before each production release, in a prepared test environment, reducing production bugs by 70%.",
-      highlightPhrases: ["Mandated demo meetings", "prepared test environment", "reducing production bugs by 70%"],
-    }
   ]
 },
 {

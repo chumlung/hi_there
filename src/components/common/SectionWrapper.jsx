@@ -34,7 +34,7 @@ export default function SectionWrapper({
       style={{ pointerEvents: opacity > 0.05 ? "auto" : "none", zIndex }}
     >
       <div
-        className={`mx-auto w-full h-full overflow-hidden flex flex-col items-center grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 bg-white py-10 md:py-16 ${sectionClassName} ${className}`}
+        className={`mx-auto w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-12 lg:gap-16 bg-white py-10 md:py-16 ${sectionClassName} ${className}`}
       >
         <div
           className="transition-all duration-200 ease-out"

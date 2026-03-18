@@ -1,4 +1,4 @@
-import SectionWrapper from "./SectionWrapper";
+import SectionWrapper from "@components/common/SectionWrapper";
 
 export default function About({ ratio = 0, offset = 0 }) {
   const baseUrl = import.meta.env.BASE_URL;

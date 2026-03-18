@@ -1,5 +1,5 @@
-import { social } from "../data/resume";
-import SectionWrapper from "./SectionWrapper";
+import { social } from "@src/data/resume";
+import SectionWrapper from "@components/common/SectionWrapper";
 
 function LinkedInIcon({ className }) {
   return (

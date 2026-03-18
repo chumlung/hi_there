@@ -1,5 +1,5 @@
-import { skills } from "../data/resume";
-import SectionWrapper from "./SectionWrapper";
+import { skills } from "@src/data/resume";
+import SectionWrapper from "@components/common/SectionWrapper";
 
 export default function Skills({ ratio = 0, offset = 0 }) {
   const baseUrl = import.meta.env.BASE_URL;

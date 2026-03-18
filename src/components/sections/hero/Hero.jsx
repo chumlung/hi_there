@@ -1,4 +1,4 @@
-import SectionWrapper from "./SectionWrapper";
+import SectionWrapper from "@components/common/SectionWrapper";
 
 export default function Hero({ ratio = 1, offset = 0 }) {
   const baseUrl = import.meta.env.BASE_URL;
