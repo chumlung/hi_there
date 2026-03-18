@@ -11,18 +11,12 @@ export default function About({ ratio = 0, offset = 0 }) {
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
       </div>
       <div className="text-slate-800 text-sm sm:text-base leading-relaxed space-y-4">
-        <p>I am a full stack engineer from the mountains of Nepal, starting my journey in 2018.</p>
-        <p className="text-slate-800">
+        <p>I am a full stack engineer from the mountains of Nepal, starting my journey in 2018. And oddly, I am more of a beach person.</p>
+          <p className="text-blue-700 font-semibold">To me, &apos;done&apos; means
           I treat every feature as a long-term investment. 
-          <p className="text-blue-700 font-semibold text-lg sm:text-xl md:text-2xl">To me, &apos;done&apos; means
           it&apos;s secure, resilient against edge cases, and—most
           importantly—clean for the next developer to pick up without a
           headache.</p> 
-        </p>
-        <p>
-          When you don&apos;t see me pushing features, I&apos;m probably pushing
-          joystick buttons or enjoying some coffee with my friends.
-        </p>
       </div>
     </div>
   );

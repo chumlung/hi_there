@@ -39,7 +39,7 @@ export default function Contact({ ratio = 0, offset = 0 }) {
         If you have a project in mind, or just want to chat about a potential collaboration, please feel free to reach out.
       </p>
       <p className="text-blue-700 font-semibold">
-        I&apos;m more than happy to contribute with new features, improving existing ones or driving a project from ideation to deployment.
+        I&apos;m more than happy to contribute with new features, improve existing ones or drive a project from ideation to deployment.
       </p>
       </div>
     </div>

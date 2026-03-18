@@ -17,9 +17,6 @@ export default function Skills({ ratio = 0, offset = 0 }) {
           <span className="font-semibold">
             &nbsp;I am comfortable learning and working with other stacks.
           </span>
-          <p>Be it quickly
-          building GraphQL APIs on FastAPI using Python or creating UI/UX components in Vue.
-          </p>
         </p>
         <p className="text-blue-700 font-semibold">
         As a team lead, I have enjoyed working closely with the stakeholders to understand their niche business requirements,
