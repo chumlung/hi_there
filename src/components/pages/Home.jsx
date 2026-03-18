@@ -151,15 +151,15 @@ export default function Home() {
 
   return (
     <div className="h-screen bg-white overflow-hidden">
-      <div className="flex h-full max-w-6xl mx-auto">
-        <div className="hidden md:flex w-32 lg:w-40 items-center justify-center">
+      <div className="relative h-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-[10%_35%_55%]">
+        <div className="hidden lg:flex lg:col-start-1 lg:col-end-2 items-center justify-start">
           <Navbar
             activeSection={activeSection}
             sectionProgress={sectionProgress}
             onNavigate={handleNavigate}
           />
         </div>
-        <main className="relative flex-1 min-w-0 h-full overflow-hidden">
+        <main className="relative h-full overflow-hidden lg:col-start-2 lg:col-end-4">
           <Hero ratio={heroRatio} offset={heroOffset} />
           <About ratio={sectionProgress.about} offset={aboutOffset} />
           <Skills ratio={sectionProgress.skills} offset={skillsOffset} />

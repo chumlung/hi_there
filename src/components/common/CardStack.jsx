@@ -46,11 +46,6 @@ export default function CardStack({
       >
         {items.map((child, index) => {
           const relativeIndex = index - currentTop;
-
-          // Keep only a 4-card stack visible:
-          // - top card exiting (slot 0)
-          // - cards in slots 1..3 move to 0..2
-          // - next card crossfades into slot 3
           if (relativeIndex < 0 || relativeIndex > maxVisibleCards) {
             return null;
           }
@@ -97,7 +92,7 @@ export default function CardStack({
           return (
             <div
               key={index}
-              className={`absolute rounded-3xl overflow-hidden border px-6 py-5 ${
+              className={`absolute rounded-3xl overflow-hidden border px-4 py-4 sm:px-5 sm:py-4 lg:px-6 lg:py-5 ${
                 shouldAnimate ? "transition-all duration-300 ease-out" : ""
               } ${
                 isTopCard || relativeIndex === 1

@@ -17,12 +17,12 @@ export default function Navbar({
 
   return (
     <nav
-      className="hidden md:flex flex-col items-start justify-center h-full"
+      className="hidden lg:flex flex-col items-start justify-center h-full"
       aria-label="Main navigation"
     >
       <a
         href="#"
-        className={`font-display text-4xl transition-colors mb-6 ${
+        className={`font-display text-2xl xl:text-4xl transition-colors mb-4 xl:mb-6 ${
           isHeroActive ? "text-blue-700" : "text-slate-900 hover:text-blue-700"
         }`}
         aria-label="Home"
@@ -35,7 +35,7 @@ export default function Navbar({
         CL
       </a>
 
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-1.5">
         {NAV_LINKS.map(({ href, id, label }) => {
           const progress = sectionProgress[id] ?? 0;
           const isActive = activeSection === id;
@@ -48,7 +48,7 @@ export default function Navbar({
                   event.preventDefault();
                   onNavigate?.(id);
                 }}
-                className={`relative inline-block text-lg font-semibold whitespace-nowrap transition-colors py-0.5 ${
+                className={`relative inline-block text-sm xl:text-lg font-semibold whitespace-nowrap transition-colors py-0.5 ${
                   isActive ? "text-blue-700" : "text-slate-800 hover:text-blue-600"
                 }`}
               >

@@ -30,14 +30,14 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className="absolute inset-0 flex items-center px-4 sm:px-6 scroll-mt-0"
+      className="absolute inset-0 flex items-center px-4 sm:px-6 md:px-5 lg:px-0 scroll-mt-0"
       style={{ pointerEvents: opacity > 0.05 ? "auto" : "none", zIndex }}
     >
       <div
-        className={`mx-auto w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-12 lg:gap-16 bg-white py-10 md:py-16 ${sectionClassName} ${className}`}
+        className={`mx-auto w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[0.35fr_0.65fr] lg:place-content-center items-center gap-8 md:gap-9 lg:gap-10 bg-white py-8 md:py-10 lg:py-0 ${sectionClassName} ${className}`}
       >
         <div
-          className="transition-all duration-200 ease-out"
+          className="min-w-0 transition-all duration-200 ease-out flex items-center justify-center"
           style={{
             opacity,
             transform: `translateY(${leftTranslateY}px)`,
@@ -46,7 +46,7 @@ export default function SectionWrapper({
           {left}
         </div>
         <div
-          className="transition-all duration-200 ease-out"
+          className="min-w-0 transition-all duration-200 ease-out flex items-center justify-center"
           style={{
             opacity,
             transform: `translateY(${rightTranslateY}px)`,

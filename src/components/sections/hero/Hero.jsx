@@ -5,10 +5,10 @@ export default function Hero({ ratio = 1, offset = 0 }) {
 
   const left = (
     <div className="flex flex-col items-start text-left max-w-2xl">
-      <p className="text-sm sm:text-base md:text-lg text-slate-700 mb-4 sm:mb-6">
+      <p className="type-heroIntro mb-4 sm:mb-6">
         Hi, I&apos;m <span className="text-blue-700">Chumlung</span>. Nice to meet you.
       </p>
-      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-slate-900 leading-tight mb-3 sm:mb-4">
+      <h1 className="type-heroTitle mb-3 sm:mb-4">
         <span className="block text-slate-700">I love building products</span>
         <span className="block text-blue-700">
           users love
@@ -20,7 +20,7 @@ export default function Hero({ ratio = 1, offset = 0 }) {
   );
 
   const right = (
-    <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex-shrink-0 rounded-3xl overflow-hidden bg-gradient-to-t from-gray-100 to-white shadow-sm flex items-center justify-center">
+    <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 flex-shrink-0 rounded-3xl overflow-hidden bg-gradient-to-t from-gray-100 to-white shadow-sm flex items-center justify-center">
       <img
         src={`${baseUrl}chumlung_limbu.png`}
         alt="Chumlung Limbu profile picture"

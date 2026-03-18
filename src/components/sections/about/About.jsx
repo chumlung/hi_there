@@ -5,7 +5,7 @@ export default function About({ ratio = 0, offset = 0 }) {
   const left = (
     <div>
       <div className="inline-flex flex-col mb-6 sm:mb-8">
-        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-slate-900">
+        <h2 className="type-sectionTitle">
           <span className="text-blue-700">About Me</span>
         </h2>
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
@@ -27,7 +27,7 @@ export default function About({ ratio = 0, offset = 0 }) {
       <img
         src={`${baseUrl}laptop_mountain.png`}
         alt="Laptop with mountain view"
-        className="max-h-[300px] w-auto rounded-2xl object-contain"
+        className="max-h-[220px] sm:max-h-[260px] lg:max-h-[300px] w-auto rounded-2xl object-contain"
       />
     </div>
   );

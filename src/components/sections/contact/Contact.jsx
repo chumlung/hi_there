@@ -29,7 +29,7 @@ export default function Contact({ ratio = 0, offset = 0 }) {
   const left = (
     <div>
       <div className="inline-flex flex-col mb-4 sm:mb-6">
-        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-blue-50">
+        <h2 className="type-sectionTitle text-blue-50">
           <span className="text-blue-700">Let's build something together</span>
         </h2>
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
@@ -54,7 +54,7 @@ export default function Contact({ ratio = 0, offset = 0 }) {
         className="p-3 rounded-full bg-blue-800/50 text-blue-100 hover:bg-blue-700 hover:text-white transition-colors"
         aria-label="LinkedIn"
       >
-        <LinkedInIcon className="w-8 h-8" />
+        <LinkedInIcon className="w-7 h-7 lg:w-8 lg:h-8" />
       </a>
       <a
         href={social.githubUrl}
@@ -63,14 +63,14 @@ export default function Contact({ ratio = 0, offset = 0 }) {
         className="p-3 rounded-full bg-blue-800/50 text-blue-100 hover:bg-blue-700 hover:text-white transition-colors"
         aria-label="GitHub"
       >
-        <GitHubIcon className="w-8 h-8" />
+        <GitHubIcon className="w-7 h-7 lg:w-8 lg:h-8" />
       </a>
       <a
         href={`mailto:${social.email}`}
         className="p-3 rounded-full bg-blue-800/50 text-blue-100 hover:bg-blue-700 hover:text-white transition-colors"
         aria-label="Email"
       >
-        <EmailIcon className="w-8 h-8" />
+        <EmailIcon className="w-7 h-7 lg:w-8 lg:h-8" />
       </a>
     </div>
   );

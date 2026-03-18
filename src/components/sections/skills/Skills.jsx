@@ -6,7 +6,7 @@ export default function Skills({ ratio = 0, offset = 0 }) {
   const left = (
     <div>
       <div className="inline-flex flex-col mb-4 sm:mb-6">
-        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-slate-900">
+        <h2 className="type-sectionTitle">
           <span className="text-blue-700">Skills</span>
         </h2>
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
@@ -49,13 +49,13 @@ export default function Skills({ ratio = 0, offset = 0 }) {
               return (
                 <span
                   key={skillLabel}
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-blue-100 text-slate-800 text-sm font-medium"
+                  className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 bg-blue-100 text-slate-800 text-xs sm:text-sm font-medium"
                 >
                   {logoSrc ? (
                     <img
                       src={logoSrc}
                       alt={`${skillLabel} logo`}
-                      className="h-6 w-6 rounded-full bg-white object-contain p-1"
+                      className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white object-contain p-1"
                     />
                   ) : (
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white">

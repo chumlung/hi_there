@@ -5,3 +5,21 @@
 html {
   scroll-behavior: smooth;
 }
+
+@layer components {
+  .type-body {
+    @apply text-sm sm:text-base md:text-base lg:text-base text-slate-700 leading-relaxed;
+  }
+
+  .type-sectionTitle {
+    @apply font-display text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl text-slate-900;
+  }
+
+  .type-heroIntro {
+    @apply text-sm sm:text-base md:text-base lg:text-lg text-slate-700;
+  }
+
+  .type-heroTitle {
+    @apply font-display text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-slate-900 leading-tight;
+  }
+}
