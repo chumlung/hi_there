@@ -20,10 +20,10 @@ export default function Hero({ ratio = 1, offset = 0 }) {
   );
 
   const right = (
-    <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex-shrink-0 flex items-center justify-center">
+    <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex-shrink-0 rounded-3xl overflow-hidden bg-gradient-to-t from-gray-100 to-white shadow-sm flex items-center justify-center">
       <img
-        src={`${baseUrl}hero-doodle.png`}
-        alt="Chumlung - thinking"
+        src={`${baseUrl}chumlung_limbu.png`}
+        alt="Chumlung Limbu profile picture"
         className="w-full h-full object-contain drop-shadow-lg"
       />
     </div>
