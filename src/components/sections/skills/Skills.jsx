@@ -1,5 +1,7 @@
-import { skills } from "@src/data/resume";
+import { developmetLifeCycle, skills } from "@src/data/resume";
 import SectionWrapper from "@components/common/SectionWrapper";
+import StepCard from "@components/sections/skills/StepCard";
+import HorizontalCardStackWheel from "@components/common/HorizontalCardStackWheel";
 
 export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
   const baseUrl = import.meta.env.BASE_URL;
@@ -19,10 +21,23 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
           </span>
         </p>
         <p className="text-blue-700 font-semibold">
-        As a team lead, I have enjoyed working closely with the stakeholders to understand their niche business requirements,
-        breaking them down into technical and non-functional ones then 
-        finally leading multiple cross-functional teams to deliver them to production.
+          As a team lead, I have enjoyed
         </p>
+        <div className="mt-2">
+          <HorizontalCardStackWheel
+            items={developmetLifeCycle}
+            heightPx={120}
+            renderItem={({ title, description, icon }, idx) => (
+              <StepCard
+                number={idx + 1}
+                title={title}
+                description={description}
+                iconSrc={`${baseUrl}assets/icons/${icon}`}
+                iconAlt={icon}
+              />
+            )}
+          />
+        </div>
       </div>
     </div>
   );

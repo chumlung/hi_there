@@ -203,6 +203,39 @@ export const skills = [
   // },
 ];
 
+export const developmetLifeCycle = [
+  {
+    title: "Understanding",
+    description: "the niche business requirements of stakeholders",
+    icon: "lens.svg"
+  },
+  {
+    title: "Identifying",
+    description: "technical solutions and designing the architecture",
+    icon: "lightbulb.svg"
+  },
+  {
+    title: "Planning",
+    description: "feature delivery timelines into sprints",
+    icon: "clock.svg"
+  },
+  {
+    title: "Developing",
+    description: "features in test-driven development approach",
+    icon: "code.svg"
+  },
+  {
+    title: "Deploying",
+    description: "into development, staging and production environments",
+    icon: "cog.svg"
+  },
+  {
+    title: "Maintaining",
+    description: "systems for performance and security",
+    icon: "shield.svg"
+  }
+]
+
 export const projects = [
 {
   name: "Phil",

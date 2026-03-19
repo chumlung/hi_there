@@ -24,7 +24,7 @@ export default function CardStack({
   const containerHeight = cardHeight + visiblePeeks * peekSize;
 
   const currentTop = Math.min(Math.floor(cardsProgress), totalCards - 1);
-  const frac = currentTop >= totalCards - 1 ? 0 : cardsProgress - currentTop;
+  const fraction = currentTop >= totalCards - 1 ? 0 : cardsProgress - currentTop;
 
   const getSlotGeometry = (slot) => ({
     width: cardWidth - slot * widthStep,
@@ -63,24 +63,30 @@ export default function CardStack({
             const slot0 = getSlotGeometry(0);
             renderWidth = slot0.width;
             renderHeight = slot0.height;
-            translateY = slot0.y - frac * topExitDistance;
-            opacity = 1 - frac;
+            translateY = slot0.y - fraction * topExitDistance;
+            const fadeStart = 0.7;
+            if (fraction <= fadeStart) {
+              opacity = 1;
+            } else {
+              const fadeProgress = (fraction - fadeStart) / (1 - fadeStart);
+              opacity = 1 - fadeProgress;
+            }
           } else if (isIncomingBottom) {
             const bottomSlot = getSlotGeometry(maxVisibleCards - 1);
             renderWidth = bottomSlot.width;
             renderHeight = bottomSlot.height;
             translateY = bottomSlot.y;
-            opacity = frac;
+            opacity = fraction;
             slotForShading = maxVisibleCards - 1;
           } else {
             const fromSlot = getSlotGeometry(relativeIndex);
             const toSlot = getSlotGeometry(relativeIndex - 1);
 
-            renderWidth = fromSlot.width + frac * (toSlot.width - fromSlot.width);
+            renderWidth = fromSlot.width + fraction * (toSlot.width - fromSlot.width);
             renderHeight =
-              fromSlot.height + frac * (toSlot.height - fromSlot.height);
-            translateY = fromSlot.y + frac * (toSlot.y - fromSlot.y);
-            slotForShading = relativeIndex - frac;
+              fromSlot.height + fraction * (toSlot.height - fromSlot.height);
+            translateY = fromSlot.y + fraction * (toSlot.y - fromSlot.y);
+            slotForShading = relativeIndex - fraction;
           }
 
           const darkenOpacity = isTopCard

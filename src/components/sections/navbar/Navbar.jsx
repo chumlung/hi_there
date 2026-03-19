@@ -175,8 +175,8 @@ export default function Navbar({
                 <li key={href}>
                   <a
                     href={href}
-                    className={`py-1 px-2 rounded-full transition-colors ${
-                      isActive ? "text-blue-700 bg-slate-100" : "hover:text-blue-700"
+                    className={`py-1 px-2 transition-colors ${
+                      isActive ? "text-blue-700" : "hover:text-blue-700"
                     }`}
                     onClick={(event) => {
                       event.preventDefault();
