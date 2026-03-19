@@ -9,125 +9,23 @@ export default function HorizontalCardStackWheel({
 }) {
   const total = items?.length ?? 0;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [scrollFraction, setScrollFraction] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [containerWidth, setContainerWidth] = useState(300);
   const containerRef = useRef(null);
-  const accRef = useRef(0);
-  const snapTimerRef = useRef(null);
-  const cursorUrl = `${import.meta.env.BASE_URL}assets/cursors/arrow-left-right.png`;
 
-  const wrap = useCallback((i) => ((i % total) + total) % total, [total]);
+  const wrapIndexes = useCallback((index) => ((index % total) + total) % total, [total]);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
+    const element = containerRef.current;
+    if (!element) return;
+    const resizeObserver = new ResizeObserver(([entry]) => {
       setContainerWidth(entry.contentRect.width);
     });
-    ro.observe(el);
-    return () => ro.disconnect();
+    resizeObserver.observe(element);
+    return () => resizeObserver.disconnect();
   }, []);
 
-  const scheduleSnap = useCallback(() => {
-    if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
-    snapTimerRef.current = setTimeout(() => {
-      setIsScrolling(false);
-      setScrollFraction(0);
-      accRef.current = 0;
-    }, 150);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || total <= 1) return;
-
-    const THRESHOLD = 120;
-
-    const onWheel = (e) => {  const isMostlyHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-      if (!isMostlyHorizontal) {
-        return;
-      }
-    
-      e.preventDefault();
-      setIsScrolling(true);
-
-      const delta =
-        Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      accRef.current += delta;
-      const fraction = accRef.current / THRESHOLD;
-
-      if (fraction >= 1) {
-        setActiveIndex((currentIndex) => wrap(currentIndex + 1));
-        accRef.current = 0;
-        setScrollFraction(0);
-      } else if (fraction <= -1) {
-        setActiveIndex((currentIndex) => wrap(currentIndex - 1));
-        accRef.current = 0;
-        setScrollFraction(0);
-      } else {
-        setScrollFraction(fraction);
-      }
-
-      scheduleSnap();
-    };
-
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [total, wrap, scheduleSnap]);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || total <= 1) return;
-
-    let startX = 0;
-    const THRESHOLD = 60;
-
-    const onStart = (e) => {
-      startX = e.touches[0].clientX;
-      accRef.current = 0;
-      setIsScrolling(true);
-    };
-
-    const onMove = (e) => {
-      const dx = startX - e.touches[0].clientX;
-      const fraction = dx / THRESHOLD;
-
-      if (fraction >= 1) {
-        setActiveIndex((currentIndex) => wrap(currentIndex + 1));
-        startX = e.touches[0].clientX;
-        setScrollFraction(0);
-      } else if (fraction <= -1) {
-        setActiveIndex((currentIndex) => wrap(currentIndex - 1));
-        startX = e.touches[0].clientX;
-        setScrollFraction(0);
-      } else {
-        setScrollFraction(fraction);
-      }
-    };
-
-    const onEnd = () => {
-      setIsScrolling(false);
-      setScrollFraction(0);
-      accRef.current = 0;
-    };
-
-    el.addEventListener("touchstart", onStart, { passive: true });
-    el.addEventListener("touchmove", onMove, { passive: true });
-    el.addEventListener("touchend", onEnd, { passive: true });
-
-    return () => {
-      el.removeEventListener("touchstart", onStart);
-      el.removeEventListener("touchmove", onMove);
-      el.removeEventListener("touchend", onEnd);
-    };
-  }, [total, wrap]);
+  const goNext = () => total > 1 && setActiveIndex((currentIndex) => wrapIndexes(currentIndex + 1));
+  const goPrev = () => total > 1 && setActiveIndex((currentIndex) => wrapIndexes(currentIndex - 1));
 
   if (!total) return null;
 
@@ -137,10 +35,10 @@ export default function HorizontalCardStackWheel({
   const CARD_W = 0.88;
   const cardPx = containerWidth * CARD_W;
 
-  const sideOffset = cardPx * (SIDE_SCALE - 1) / 2 - PEEK;
-  const hiddenOffset = cardPx * (HIDDEN_SCALE - 1) / 2 - PEEK;
+  const sideOffset = (cardPx * (SIDE_SCALE - 1)) / 2 - PEEK;
+  const hiddenOffset = (cardPx * (HIDDEN_SCALE - 1)) / 2 - PEEK;
 
-  const getSlot = (s) => {
+  const getSlotStyle = (s) => {
     switch (s) {
       case 0:
         return { dx: 0, scale: 1, opacity: 1, darkenFactor: 0, z: 30 };
@@ -157,19 +55,8 @@ export default function HorizontalCardStackWheel({
     }
   };
 
-  const interpolateNumber = (currentSlotState, nextSlotState, transitionProgress) => currentSlotState + (nextSlotState - currentSlotState) * transitionProgress;
-
-  const getStyleAttributes = (currentSlotState, nextSlotState, transitionProgress) => ({
-    dx: interpolateNumber(currentSlotState.dx, nextSlotState.dx, transitionProgress),
-    scale: interpolateNumber(currentSlotState.scale, nextSlotState.scale, transitionProgress),
-    opacity: interpolateNumber(currentSlotState.opacity, nextSlotState.opacity, transitionProgress),
-    darkenFactor: interpolateNumber(currentSlotState.darkenFactor, nextSlotState.darkenFactor, transitionProgress),
-    z: Math.round(interpolateNumber(currentSlotState.z, nextSlotState.z, transitionProgress)),
-  });
-
   const slots = [-2, -1, 0, 1, 2];
-  const transitionProgress = Math.abs(scrollFraction);
-  const className = isScrolling ? "" : "transition-all duration-300 ease-out";
+  const canNavigate = total > 1;
 
   return (
     <div
@@ -180,39 +67,63 @@ export default function HorizontalCardStackWheel({
         height: `${heightInPx}px`,
         paddingTop: `${paddingInPx}px`,
         paddingBottom: `${paddingInPx}px`,
-        cursor: `url("${cursorUrl}") 8 8, ew-resize`,
       }}
     >
       {slots.map((slot) => {
-        const idx = wrap(activeIndex + slot);
-        const target =
-          scrollFraction > 0 ? slot - 1 : scrollFraction < 0 ? slot + 1 : slot;
-        const styleAttributes = getStyleAttributes(getSlot(slot), getSlot(target), transitionProgress);
-
-        if (styleAttributes.opacity < 0.01) return null;
+        const idx = wrapIndexes(activeIndex + slot);
+        const s = getSlotStyle(slot);
 
         return (
           <div
-            key={slot}
-            className={`absolute left-1/2 top-1/2 ${className}`}
+            key={idx}
+            className="absolute left-1/2 top-1/2 transition-all duration-500 ease-out"
             style={{
               width: `${CARD_W * 100}%`,
-              transform: `translate(-50%, -50%) translateX(${styleAttributes.dx}px) scale(${styleAttributes.scale})`,
-              opacity: styleAttributes.opacity,
-              zIndex: styleAttributes.z,
+              transform: `translate(-50%, -50%) translateX(${s.dx}px) scale(${s.scale})`,
+              opacity: s.opacity,
+              zIndex: s.z,
               pointerEvents: slot === 0 ? "auto" : "none",
             }}
           >
-            {styleAttributes.darkenFactor > 0.01 && (
-              <div
-                className="pointer-events-none absolute inset-0 z-10 rounded-2xl"
-                style={{ backgroundColor: `rgba(0,0,0,${styleAttributes.darkenFactor})` }}
-              />
-            )}
+            <div
+              className="pointer-events-none absolute inset-0 z-10 rounded-2xl transition-[background-color] duration-500 ease-out"
+              style={{ backgroundColor: `rgba(0,0,0,${s.darkenFactor})` }}
+            />
             {renderItem(items[idx], idx, { isActive: slot === 0 })}
           </div>
         );
       })}
+
+      {canNavigate && (
+        <>
+          <button
+            type="button"
+            onClick={goPrev}
+            aria-label="Previous card"
+            className="absolute left-1 top-1/2 -translate-y-1/2 z-40
+                       flex items-center justify-center w-7 h-7 rounded-full
+                       bg-white/30 backdrop-blur-sm text-blue-600/60
+                       hover:bg-white/50 hover:text-blue-600 active:bg-white/60 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="12,4 6,10 12,16" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label="Next card"
+            className="absolute right-1 top-1/2 -translate-y-1/2 z-40
+                       flex items-center justify-center w-7 h-7 rounded-full
+                       bg-white/30 backdrop-blur-sm text-blue-600/60
+                       hover:bg-white/50 hover:text-blue-600 active:bg-white/60 transition-colors"
+In          >
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="8,4 14,10 8,16" />
+            </svg>
+          </button>
+        </>
+      )}
     </div>
   );
 }
