@@ -1,6 +1,6 @@
 import SectionWrapper from "@components/common/SectionWrapper";
 
-export default function About({ ratio = 0, offset = 0 }) {
+export default function About({ ratio = 0, offset = 0, mode = "desktop" }) {
   const baseUrl = import.meta.env.BASE_URL;
   const left = (
     <div>
@@ -40,6 +40,7 @@ export default function About({ ratio = 0, offset = 0 }) {
       ratio={ratio}
       offset={offset}
       sectionClassName="bg-white"
+      mode={mode}
     />
   );
 }

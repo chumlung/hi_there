@@ -8,7 +8,22 @@ export default function SectionWrapper({
   offset = 0,
   className = "",
   sectionClassName = "",
+  mode = "desktop",
+  mobileGridClassName = "grid-cols-1",
 }) {
+  if (mode === "mobile") {
+    return (
+      <section id={id} className="scroll-mt-20">
+        <div
+          className={`mx-auto w-full max-w-6xl grid ${mobileGridClassName} gap-6 items-center ${sectionClassName} ${className}`}
+        >
+          <div className="min-w-0">{left}</div>
+          <div className="min-w-0">{right}</div>
+        </div>
+      </section>
+    );
+  }
+
   // Introduce a buffer near 0 and 1 so opacity stays fully
   // transparent/opaque for a while before starting to fade.
   const BUFFER = 0.30; // 15% of visibility on each side

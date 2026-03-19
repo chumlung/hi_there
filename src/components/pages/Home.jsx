@@ -11,6 +11,9 @@ const SECTION_IDS = ["about", "skills", "projects", "blogs", "contact"];
 const TRACK_IDS = ["hero", ...SECTION_IDS];
 const PROJECTS_INDEX = 3;
 const PROJECTS_STACK_SCROLL_SPAN = 1.7;
+const MOBILE_MAX_WIDTH_PX = 767;
+const TABLET_MIN_WIDTH_PX = 768;
+const TABLET_MAX_WIDTH_PX = 1023;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -60,11 +63,41 @@ function getActiveSection(ratios) {
 }
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH_PX}px)`).matches;
+  });
+  const [isTablet, setIsTablet] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia(
+      `(min-width: ${TABLET_MIN_WIDTH_PX}px) and (max-width: ${TABLET_MAX_WIDTH_PX}px)`,
+    ).matches;
+  });
   const [virtualIndex, setVirtualIndex] = useState(0);
   const [ratios, setRatios] = useState(() => computeRatios(0));
   const touchStartYRef = useRef(null);
 
   useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH_PX}px)`);
+    const tabletMedia = window.matchMedia(
+      `(min-width: ${TABLET_MIN_WIDTH_PX}px) and (max-width: ${TABLET_MAX_WIDTH_PX}px)`,
+    );
+    const handleChange = (event) => setIsMobile(event.matches);
+    const handleTabletChange = (event) => setIsTablet(event.matches);
+    setIsMobile(media.matches);
+    setIsTablet(tabletMedia.matches);
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", handleChange);
+      tabletMedia.addEventListener("change", handleTabletChange);
+      return () => media.removeEventListener("change", handleChange);
+    }
+    media.addListener(handleChange);
+    tabletMedia.addListener(handleTabletChange);
+    return () => media.removeListener(handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || isTablet) return;
     const maxIndex =
       TRACK_IDS.length - 1 + (PROJECTS_STACK_SCROLL_SPAN - 1);
 
@@ -111,9 +144,10 @@ export default function Home() {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
     };
-  }, []);
+  }, [isMobile, isTablet]);
 
   const handleNavigate = useCallback((id) => {
+    if (isMobile || isTablet) return;
     const index = TRACK_IDS.indexOf(id);
     if (index === -1) return;
     const virtualTarget =
@@ -123,6 +157,44 @@ export default function Home() {
     setVirtualIndex(virtualTarget);
     setRatios(computeRatios(index));
   }, []);
+
+  if (isMobile) {
+    return (
+      <div
+        className="h-screen bg-white overflow-x-hidden overflow-y-auto"
+        data-scroll-root="true"
+      >
+        <Navbar variant="mobile" />
+        <main className="px-4 pt-16 pb-10 space-y-10">
+          <Hero mode="mobile" />
+          <About mode="mobile" />
+          <Skills mode="mobile" />
+          <Projects mode="mobile" />
+          <Blogs mode="mobile" />
+          <Contact mode="mobile" />
+        </main>
+      </div>
+    );
+  }
+
+  if (isTablet) {
+    return (
+      <div className="h-screen bg-white overflow-x-hidden overflow-y-auto">
+        <Navbar variant="tablet" />
+        <main className="px-4 pt-16 pb-10 space-y-10">
+          <Hero
+            mode="mobile"
+            mobileGridClassName="grid-cols-1 md:grid-cols-2"
+          />
+          <About mode="mobile" />
+          <Skills mode="mobile" />
+          <Projects mode="mobile" />
+          <Blogs mode="mobile" />
+          <Contact mode="mobile" />
+        </main>
+      </div>
+    );
+  }
 
   const sectionProgress = {
     about: ratios.about ?? 0,

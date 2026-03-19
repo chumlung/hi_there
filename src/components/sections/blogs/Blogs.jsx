@@ -1,7 +1,7 @@
 import { blogPosts } from "@src/data/blogPlaceholders";
 import SectionWrapper from "@components/common/SectionWrapper";
 
-export default function Blogs({ ratio = 0, offset = 0 }) {
+export default function Blogs({ ratio = 0, offset = 0, mode = "desktop" }) {
   const left = (
     <div>
       <div className="inline-flex flex-col mb-4 sm:mb-6">
@@ -51,6 +51,7 @@ export default function Blogs({ ratio = 0, offset = 0 }) {
       ratio={ratio}
       offset={offset}
       sectionClassName="bg-slate-50"
+      mode={mode}
     />
   );
 }

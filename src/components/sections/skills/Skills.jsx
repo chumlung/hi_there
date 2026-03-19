@@ -1,7 +1,7 @@
 import { skills } from "@src/data/resume";
 import SectionWrapper from "@components/common/SectionWrapper";
 
-export default function Skills({ ratio = 0, offset = 0 }) {
+export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
   const baseUrl = import.meta.env.BASE_URL;
   const left = (
     <div>
@@ -80,6 +80,7 @@ export default function Skills({ ratio = 0, offset = 0 }) {
       ratio={ratio}
       offset={offset}
       sectionClassName="bg-slate-50"
+      mode={mode}
     />
   );
 }

@@ -25,7 +25,7 @@ function EmailIcon({ className }) {
   );
 }
 
-export default function Contact({ ratio = 0, offset = 0 }) {
+export default function Contact({ ratio = 0, offset = 0, mode = "desktop" }) {
   const left = (
     <div>
       <div className="inline-flex flex-col mb-4 sm:mb-6">
@@ -82,6 +82,7 @@ export default function Contact({ ratio = 0, offset = 0 }) {
       right={right}
       ratio={ratio}
       offset={offset}
+      mode={mode}
     />
   );
 }

@@ -1,6 +1,11 @@
 import SectionWrapper from "@components/common/SectionWrapper";
 
-export default function Hero({ ratio = 1, offset = 0 }) {
+export default function Hero({
+  ratio = 1,
+  offset = 0,
+  mode = "desktop",
+  mobileGridClassName,
+}) {
   const baseUrl = import.meta.env.BASE_URL;
 
   const left = (
@@ -20,7 +25,7 @@ export default function Hero({ ratio = 1, offset = 0 }) {
   );
 
   const right = (
-    <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 flex-shrink-0 rounded-3xl overflow-hidden bg-gradient-to-t from-gray-100 to-white shadow-sm flex items-center justify-center">
+    <div className="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 flex-shrink-0 rounded-3xl overflow-hidden bg-gradient-to-t from-gray-100 to-white shadow-sm flex items-center justify-center">
       <img
         src={`${baseUrl}chumlung_limbu.png`}
         alt="Chumlung Limbu profile picture"
@@ -36,7 +41,9 @@ export default function Hero({ ratio = 1, offset = 0 }) {
       right={right}
       ratio={ratio}
       offset={offset}
-      sectionClassName="pt-20 md:pt-24"
+      mode={mode}
+      mobileGridClassName={mobileGridClassName}
+      sectionClassName="pt-8 md:pt-0 lg:pt-24"
     />
   );
 }
