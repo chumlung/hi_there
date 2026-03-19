@@ -76,6 +76,7 @@ export default function Home() {
   const [virtualIndex, setVirtualIndex] = useState(0);
   const [ratios, setRatios] = useState(() => computeRatios(0));
   const touchStartYRef = useRef(null);
+  const [mobileActiveSection, setMobileActiveSection] = useState("hero");
 
   useEffect(() => {
     const media = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH_PX}px)`);
@@ -158,13 +159,68 @@ export default function Home() {
     setRatios(computeRatios(index));
   }, []);
 
+  useEffect(() => {
+    if (!isMobile && !isTablet) return;
+    const ids = ["hero", ...SECTION_IDS];
+    const container =
+      document.querySelector('[data-scroll-root="true"]') ?? window;
+    const NAV_OFFSET_PX = 80;
+
+    const updateActive = () => {
+      let bestId = ids[0];
+      let bestDist = Infinity;
+      let containerTop = 0;
+
+      if (!(container instanceof Window)) {
+        const rect = container.getBoundingClientRect();
+        containerTop = rect.top;
+      }
+
+      ids.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const top = rect.top - containerTop;
+        const dist = Math.abs(top - NAV_OFFSET_PX);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestId = id;
+        }
+      });
+
+      setMobileActiveSection(bestId);
+    };
+
+    updateActive();
+    const options = { passive: true };
+    if (container instanceof Window) {
+      window.addEventListener("scroll", updateActive, options);
+    } else {
+      container.addEventListener("scroll", updateActive, options);
+    }
+    window.addEventListener("resize", updateActive, options);
+
+    return () => {
+      if (container instanceof Window) {
+        window.removeEventListener("scroll", updateActive);
+      } else {
+        container.removeEventListener("scroll", updateActive);
+      }
+      window.removeEventListener("resize", updateActive);
+    };
+  }, [isMobile, isTablet]);
+
   if (isMobile) {
     return (
       <div
         className="h-screen bg-white overflow-x-hidden overflow-y-auto"
         data-scroll-root="true"
       >
-        <Navbar variant="mobile" />
+        <Navbar
+          variant="mobile"
+          activeSection={mobileActiveSection}
+          onNavigate={setMobileActiveSection}
+        />
         <main className="px-4 pt-16 pb-10 space-y-10">
           <Hero mode="mobile" />
           <About mode="mobile" />
@@ -179,9 +235,16 @@ export default function Home() {
 
   if (isTablet) {
     return (
-      <div className="h-screen bg-white overflow-x-hidden overflow-y-auto">
-        <Navbar variant="tablet" />
-        <main className="px-4 pt-16 pb-10 space-y-10">
+      <div
+        className="h-screen bg-white overflow-x-hidden overflow-y-auto"
+        data-scroll-root="true"
+      >
+        <Navbar
+          variant="tablet"
+          activeSection={mobileActiveSection}
+          onNavigate={setMobileActiveSection}
+        />
+        <main className="mx-8 pt-16 pb-10 space-y-10">
           <Hero
             mode="mobile"
             mobileGridClassName="grid-cols-1 md:grid-cols-2"

@@ -33,6 +33,28 @@ function MenuIcon({ open }) {
   );
 }
 
+function KebabIcon({ open }) {
+  return (
+    <span className="flex flex-col items-center justify-center gap-0.5 h-5 w-5" aria-hidden>
+      <span
+        className={`h-1 w-1 rounded-full bg-current transition-transform duration-200 ease-out ${
+          open ? "-translate-y-[3px]" : ""
+        }`}
+      />
+      <span
+        className={`h-1 w-1 rounded-full bg-current transition-opacity duration-200 ease-out ${
+          open ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <span
+        className={`h-1 w-1 rounded-full bg-current transition-transform duration-200 ease-out ${
+          open ? "translate-y-[3px]" : ""
+        }`}
+      />
+    </span>
+  );
+}
+
 export default function Navbar({
   activeSection,
   sectionProgress = {},
@@ -76,6 +98,7 @@ export default function Navbar({
               onClick={(event) => {
                 event.preventDefault();
                 scrollToSection("hero");
+                onNavigate?.("hero");
                 setMobileOpen(false);
               }}
             >
@@ -89,31 +112,40 @@ export default function Navbar({
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((prev) => !prev)}
             >
-              <MenuIcon open={mobileOpen} />
+              <KebabIcon open={mobileOpen} />
             </button>
           </div>
         </div>
 
         {mobileOpen && (
-          <div className="bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
-            <ul className="px-4 py-3 flex flex-col items-end gap-1.5 text-sm font-semibold text-slate-800">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="block rounded-lg px-3 py-2 hover:bg-slate-100 active:bg-slate-200 transition-colors text-right min-w-[7rem]"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    const id = href.replace("#", "");
-                    scrollToSection(id);
-                    setMobileOpen(false);
-                  }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="px-4 pb-3">
+            <div className="mt-1 rounded-2xl bg-slate-100/90 backdrop-blur shadow-lg border border-slate-300/70">
+              <ul className="py-2 px-2 text-sm font-semibold text-slate-800">
+                {NAV_LINKS.map(({ href, id, label }) => {
+                  const isActive = activeSection === id;
+                  return (
+                    <li key={href}>
+                      <button
+                        type="button"
+                        className={`w-full text-left px-4 py-2 flex items-center gap-3 rounded-xl transition-colors ${
+                          isActive
+                            ? "bg-white text-blue-700 shadow-sm"
+                            : "hover:bg-white/70 active:bg-white"
+                        }`}
+                        onClick={() => {
+                          const targetId = href.replace("#", "");
+                          onNavigate?.(id);
+                          scrollToSection(targetId);
+                          setMobileOpen(false);
+                        }}
+                      >
+                        <span>{label}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         )}
       </nav>
@@ -122,7 +154,7 @@ export default function Navbar({
 
   if (variant === "tablet") {
     return (
-      <nav className="hidden md:flex lg:hidden" aria-label="Main navigation">
+      <nav className="fixed top-0 inset-x-0 z-50 hidden md:flex lg:hidden" aria-label="Main navigation">
         <div className="w-full px-6 py-3 flex items-center justify-between bg-white/90 backdrop-blur border-b border-slate-200">
           <a
             href="#hero"
@@ -131,26 +163,33 @@ export default function Navbar({
             onClick={(event) => {
               event.preventDefault();
               scrollToSection("hero");
+              onNavigate?.("hero");
             }}
           >
             CL
           </a>
           <ul className="flex items-center gap-5 text-sm font-semibold text-slate-800">
-            {NAV_LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <a
-                  href={href}
-                  className="hover:text-blue-700 transition-colors py-1"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    const id = href.replace("#", "");
-                    scrollToSection(id);
-                  }}
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
+            {NAV_LINKS.map(({ href, id, label }) => {
+              const isActive = activeSection === id;
+              return (
+                <li key={href}>
+                  <a
+                    href={href}
+                    className={`py-1 px-2 rounded-full transition-colors ${
+                      isActive ? "text-blue-700 bg-slate-100" : "hover:text-blue-700"
+                    }`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      const sectionId = href.replace("#", "");
+                      onNavigate?.(id);
+                      scrollToSection(sectionId);
+                    }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
