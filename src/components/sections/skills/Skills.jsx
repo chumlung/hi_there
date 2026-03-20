@@ -14,13 +14,10 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
       </div>
       <div className="text-sm sm:text-base leading-relaxed space-y-4 text-slate-800">
         <p>
-          While my expertise is in Javascript,
-          <span className="font-semibold">
-            &nbsp;I am comfortable learning and working with other stacks.
-          </span>
+          My core expertise is in JavaScript and TypeScript.
         </p>
         <p className="text-blue-700 font-semibold">
-          As a team lead, I have enjoyed
+          Also, as a team lead, I have led teams across different timezones. <br/>I thrive in
         </p>
         <div className="mt-4">
           <DevelopmentTimeline items={developmetLifeCycle} baseUrl={baseUrl} />

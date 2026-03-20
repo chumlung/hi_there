@@ -1,5 +1,7 @@
-import { blogPosts } from "@src/data/blogPlaceholders";
+import { blogPosts } from "@src/data/blogs";
 import SectionWrapper from "@components/common/SectionWrapper";
+import HorizontalCardStackWheel from "@components/common/HorizontalCardStackWheel";
+import BlogCard from "./BlogCard";
 
 export default function Blogs({ ratio = 0, offset = 0, mode = "desktop" }) {
   const left = (
@@ -22,24 +24,21 @@ export default function Blogs({ ratio = 0, offset = 0, mode = "desktop" }) {
   );
 
   const right = (
-    <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
-      {blogPosts.map((post) => (
-        <div
-          key={post.id}
-          className="rounded-xl border border-blue-200 bg-blue-50 p-4 md:p-5 lg:p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-blue-400 hover:bg-blue-100 focus-within:outline-none"
-          tabIndex={0}
-        >
-          <h3 className="font-semibold text-base sm:text-lg text-slate-900 mb-2">
-            {post.title}
-          </h3>
-          {post.date && (
-            <p className="text-xs text-slate-500 mb-2">{post.date}</p>
-          )}
-          <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">
-            {post.excerpt}
-          </p>
-        </div>
-      ))}
+    <div className="w-full flex justify-center">
+      <HorizontalCardStackWheel
+        items={blogPosts}
+        heightInPx={400}
+        paddingInPx={12}
+        widthPercent={100}
+        renderItem={(post) => (
+          <BlogCard
+            title={post.title}
+            excerpt={post.excerpt}
+            link={post.link}
+            imageFileName={post.imageFileName}
+          />
+        )}
+      />
     </div>
   );
 

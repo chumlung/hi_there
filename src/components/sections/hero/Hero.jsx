@@ -10,15 +10,25 @@ export default function Hero({
 
   const left = (
     <div className="flex flex-col items-start text-left max-w-2xl">
-      <p className="type-heroIntro mb-4 sm:mb-6">
-        Hi, I&apos;m <span className="text-blue-700">Chumlung</span>. Nice to meet you.
-      </p>
-      <h1 className="type-heroTitle mb-3 sm:mb-4">
-        <span className="block text-slate-700">I love building products</span>
+      <h1 className="type-heroTitle">
+        <span className="block text-slate-700">I love</span>
         <span className="block text-blue-700">
-          users love
-          <span className="block text-slate-700">&</span>
-          developers enjoy maintaining.
+          bridging
+          <span className="block text-slate-700">the gap</span>
+        </span>
+          <span className="block text-slate-700">between</span>
+          <span className="block text-blue-700 mb-1">
+          product requirements <br />
+          |
+          </span>
+        </h1>
+        <p className="type-heroIntro">
+        Hi, I&apos;m <span className="font-semibold">Chumlung</span>. Nice to meet you.
+      </p>
+        <h1 className="type-heroTitle mb-3 sm:mb-4">
+        <span className="block text-blue-700">
+          | <br/>
+          & technical solutions
         </span>
       </h1>
     </div>

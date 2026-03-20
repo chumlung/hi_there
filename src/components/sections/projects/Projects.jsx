@@ -89,7 +89,7 @@ export default function Projects({
       </div>
       <div className="text-sm sm:text-base leading-relaxed text-slate-700 space-y-4">
       <p>
-        Here are some of the highlights from the projects I have worked on.
+        I have an empathetic approach to a project and it's requirements.
       </p>
       <p className="text-blue-700 font-semibold">
         I believe a project goes beyond the codebase, it's about the user experience, the business requirements and the team.

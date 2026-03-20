@@ -11,13 +11,10 @@ export default function About({ ratio = 0, offset = 0, mode = "desktop" }) {
         <span className="mt-1 h-1 w-16 rounded-full bg-blue-400" />
       </div>
       <div className="text-slate-800 text-sm sm:text-base leading-relaxed space-y-4">
-        <p>I am a full stack engineer from the mountains of Nepal, starting my journey in 2018. And oddly-I am more of a beach person.</p>
+        <p>I am a senior full stack engineer from the mountains of Nepal, starting my journey in 2018. And oddly-I am more of a beach person.</p>
           <p className="text-blue-700 font-semibold">
-          I treat every feature as a long-term investment. <br />
-          To me, &apos;done&apos; means
-          it&apos;s secure, resilient against edge cases, and—most
-          importantly—clean for the next developer to pick up without a
-          headache.</p> 
+            I enjoy collaborating with stakeholders to understand their needs and implement scalable, maintainable and performant solutions.
+          </p>
       </div>
     </div>
   );

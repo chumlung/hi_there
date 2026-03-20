@@ -75,7 +75,7 @@ export default function HorizontalCardStackWheel({
 
         return (
           <div
-            key={idx}
+            key={slot}
             className="absolute left-1/2 top-1/2 transition-all duration-500 ease-out"
             style={{
               width: `${CARD_W * 100}%`,
@@ -117,7 +117,7 @@ export default function HorizontalCardStackWheel({
                        flex items-center justify-center w-7 h-7 rounded-full
                        bg-white/30 backdrop-blur-sm text-blue-600/60
                        hover:bg-white/50 hover:text-blue-600 active:bg-white/60 transition-colors"
-In          >
+          >
             <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="8,4 14,10 8,16" />
             </svg>

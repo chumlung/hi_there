@@ -25,6 +25,11 @@ export const skills = [
         logoUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
       },
+      {
+        label: "Golang",
+        logoUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+      }
     ],
   },
   {
@@ -155,43 +160,12 @@ export const skills = [
       },
     ],
   },
-  // {
-  //   heading: "ci-cd-tools",
-  //   label: "CI/CD & Tools",
-  //   items: [
-  //     {
-  //       label: "Jenkins",
-  //       logoUrl:
-  //         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
-  //     },
-  //     {
-  //       label: "Travis",
-  //       logoUrl:
-  //         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/travis/travis-plain.svg",
-  //     },
-  //     {
-  //       label: "GitHub Actions",
-  //       logoUrl:
-  //         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg",
-  //     },
-  //     {
-  //       label: "Git",
-  //       logoUrl:
-  //         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  //     },
-  //     {
-  //       label: "GitHub",
-  //       logoUrl:
-  //         "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  //     },
-  //   ],
-  // },
 ];
 
 export const developmetLifeCycle = [
   {
     title: "Understanding",
-    description: "the niche business requirements of stakeholders",
+    description: "the niche business requirements thorugh clear and concise conversations",
     icon: "lens.svg"
   },
   {
@@ -205,8 +179,8 @@ export const developmetLifeCycle = [
     icon: "clock.svg"
   },
   {
-    title: "Developing",
-    description: "features in test-driven development approach",
+    title: "Leading",
+    description: "engineering teams in test-driven development approach",
     icon: "code.svg"
   },
   {
@@ -222,17 +196,25 @@ export const developmetLifeCycle = [
 ]
 
 export const projects = [
-{
-  name: "Phil",
-  roles: ["Front End Engineer"],
-  industryDomain: "Healthcare",
-  siteUrl: "https://phil.us/",
-  description: "An initiative to create a marketing site which can dynamically change its theme and user journey for a patient, based on the URLs provided to them by Phil’s health care provider partners.",
-  keyContributions: [
+  {
+    name: "GoLend",
+    roles: ["Team Lead", "Full Stack Engineer"],
+    industryDomain: "FinTech",
+    siteUrl: "https://www.golend.co.nz/",
+    description: "A peer to peer marketplace which matches those looking to invest with those looking to borrow.",
+    keyContributions: [
       {
-        title: "Architected a highly configurable Next.js application using Orchestrator - component registry pattern, driven by JSON configuration files tailored for each client individually, enabling rapid, per-client dynamic theming.",
-        highlightPhrases: ["Architected", "Orchestrator - component registry pattern", "rapid", "per-client dynamic theming"],
-      }
+        title: "Ensured fast to market delivery of the product by establishing the codebase foundation, database schema and rapid development.",
+        highlightPhrases: ["Ensured fast to market delivery of the product","establishing", "codebase foundation", "database schema", "rapid development"],
+      },
+      {
+        title: "Ensured the critical financial calculations are accurate and reliable by implementing service-repository pattern for cleaner, testable and maintainable service layer functions",
+        highlightPhrases: ["Ensured the critical financial calculations", "accurate", "reliable", "cleaner", "testable", "maintainable"],
+      },
+      {
+        title: "Increased the marketing site performance by 30% for faster loading times and better user experience, through refactored codebase.",
+        highlightPhrases: ["Increased the marketing site performance by 30%", "refactored codebase", "faster loading times", "better user experience"],
+      },
     ]
   },
   {
@@ -244,37 +226,16 @@ export const projects = [
     keyContributions: [
       {
         title: "Established a standalone module within the existing microservices architecture, enabling its independent deployment, tech stack and database.",
-        highlightPhrases: ["standalone module", "microservices architecture", "independent deployment", "tech stack and database"],
+        highlightPhrases: ["Established", "standalone module", "microservices architecture", "independent deployment", "tech stack and database"],
       },
       {
-        title: "Built a secure, stateful authentication mechanism for users participating in the survey without user login required, resulting in convenient survey link distribution and participation.",
-        highlightPhrases: ["Built", "secure", "stateful authentication mechanism", "convenient survey link distribution and participation"],
+        title: "Built a seamless survey participation system for users without login required, with secure, stateful authentication mechanism.",
+        highlightPhrases: ["Built", "seamless survey participation system", "stateful authentication mechanism"],
       },
       {
         title: "Saved the DevOps team an estimated 1 week by implementing runtime configuration file strategy for the Vite-built application.",
         highlightPhrases: ["Saved the DevOps", "1 week", "implementing runtime configuration file strategy"],
       }
-    ]
-  },
-  {
-    name: "GoLend",
-    roles: ["Team Lead", "Full Stack Engineer"],
-    industryDomain: "FinTech",
-    siteUrl: "https://www.golend.co.nz/",
-    description: "A peer to peer marketplace which matches those looking to invest with those looking to borrow.",
-    keyContributions: [
-      {
-        title: "Implemented service-repository pattern for cleaner, maintainable service layer functions handling complex fintech domain business needs with meticulous unit tests for all critical services, resulting in 90% test coverage.",
-        highlightPhrases: ["Implemented service-repository pattern", "cleaner", "maintainable", "meticulous unit tests", "90% test coverage"],
-      },
-      {
-        title: "Analyzed the marketing site performance with Lighthouse, refactored codebase to remove unused Javascript code, scripts and increased the site performance by 30%.",
-        highlightPhrases: ["markteing site performance", "Lighthouse", "refactored codebase", "increased the site performance by 30%"],
-      },
-      {
-        title: "Devised the disaster recovery plan at the database layer achieving Recover Point Objective of 5 minutes.",
-        highlightPhrases: ["Devised", "disaster recovery plan", "achieving Recover Point Objective of 5 minutes"],
-      },
     ]
   },
   {
@@ -285,13 +246,26 @@ export const projects = [
     description: "A project to detecting Sleep Apnea on patients based on facial features of users and their answers to survey questions.",
     keyContributions: [
       {
-        title: "Architected a multi-tenant database system with a shared-database, separate-schema approach to strike the right balance between cost, security and complexity. ",
-        highlightPhrases: ["Architected", "multi-tenant", "shared-database, separate-schema approach", "cost, security and complexity"],
+        title: "Saved database infrastructure cost by architecting a multi-tenant database system with a shared-database, separate-schema approach.",
+        highlightPhrases: ["Saved database infrastructure cost", "architecting", "multi-tenant", "shared-database, separate-schema approach"],
       },
       {
-        title: "Built Role-based access control system capable of customizing authorization of minute levels of permissions.",
-        highlightPhrases: ["Built", "Role-based access control system", "authorization of minute levels of permissions"],
+        title: "Enabled admin users to control authorization of data resources by building a conveninent and secure Role-based access control system.",
+        highlightPhrases: ["Enabled admin users to control authorization of data resources", "building", "conveninent", "secure", "Role-based access control system"],
       }
     ]
   },
+  {
+    name: "Phil",
+    roles: ["Front End Engineer"],
+    industryDomain: "Healthcare",
+    siteUrl: "https://phil.us/",
+    description: "An initiative to create a marketing site which can dynamically change its theme and user journey for a patient, based on the URLs provided to them by Phil’s health care provider partners.",
+    keyContributions: [
+        {
+          title: "Enabled Phil to quickly deploy dynamic, tailored marketing sites by architecting a highly configurable Next.js application using Orchestrator - component registry pattern, driven by tailored JSON configuration files.",
+          highlightPhrases: ["Enabled Phil to quickly deploy dynamic", "tailored marketing sites", "architecting", "highly configurable Next.js application", "Orchestrator - component registry pattern", "tailored JSON configuration files"],
+        }
+      ]
+    },
 ];
