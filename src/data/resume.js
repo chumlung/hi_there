@@ -32,12 +32,12 @@ export const skills = [
     label: "Frameworks & Libraries",
     items: [
       {
-        label: "React",
+        label: "ReactJS",
         logoUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       },
       {
-        label: "Node.js",
+        label: "NodeJS",
         logoUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
       },
@@ -47,7 +47,7 @@ export const skills = [
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
       },
       {
-        label: "Next.js",
+        label: "NextJS",
         logoUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       },
@@ -84,24 +84,9 @@ export const skills = [
     label: "Testing & Quality",
     items: [
       {
-        label: "Mocha",
-        logoUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mocha/mocha-plain.svg",
-      },
-      {
-        label: "Chai",
-        logoUrl:
-          "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/chai.svg",
-      },
-      {
         label: "Jest",
         logoUrl:
           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg",
-      },
-      {
-        label: "Sentry",
-        logoUrl:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sentry/sentry-original.svg",
       },
       {
         label: "SonarQube",
@@ -216,7 +201,7 @@ export const developmetLifeCycle = [
   },
   {
     title: "Planning",
-    description: "feature delivery timelines into sprints",
+    description: "feature delivery timelines into sprint deliverables",
     icon: "clock.svg"
   },
   {

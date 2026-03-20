@@ -213,7 +213,7 @@ export default function Home() {
   if (isMobile) {
     return (
       <div
-        className="h-screen bg-white overflow-x-hidden overflow-y-auto"
+        className="h-screen site-bg overflow-x-hidden overflow-y-auto"
         data-scroll-root="true"
       >
         <Navbar
@@ -236,7 +236,7 @@ export default function Home() {
   if (isTablet) {
     return (
       <div
-        className="h-screen bg-white overflow-x-hidden overflow-y-auto"
+        className="h-screen site-bg overflow-x-hidden overflow-y-auto"
         data-scroll-root="true"
       >
         <Navbar
@@ -285,7 +285,7 @@ export default function Home() {
   const contactOffset = 5 - sectionPosition;
 
   return (
-    <div className="h-screen bg-white overflow-hidden">
+    <div className="h-screen site-bg overflow-hidden">
       <div className="relative h-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-[10%_35%_55%]">
         <div className="hidden lg:flex lg:col-start-1 lg:col-end-2 items-center justify-start">
           <Navbar

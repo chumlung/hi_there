@@ -1,7 +1,6 @@
 import { developmetLifeCycle, skills } from "@src/data/resume";
 import SectionWrapper from "@components/common/SectionWrapper";
-import StepCard from "@components/sections/skills/StepCard";
-import HorizontalCardStackWheel from "@components/common/HorizontalCardStackWheel";
+import DevelopmentTimeline from "@components/sections/skills/DevelopmentTimeline";
 
 export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
   const baseUrl = import.meta.env.BASE_URL;
@@ -23,20 +22,8 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
         <p className="text-blue-700 font-semibold">
           As a team lead, I have enjoyed
         </p>
-        <div className="mt-2">
-          <HorizontalCardStackWheel
-            items={developmetLifeCycle}
-            heightPx={120}
-            renderItem={({ title, description, icon }, idx) => (
-              <StepCard
-                number={idx + 1}
-                title={title}
-                description={description}
-                iconSrc={`${baseUrl}assets/icons/${icon}`}
-                iconAlt={icon}
-              />
-            )}
-          />
+        <div className="mt-4">
+          <DevelopmentTimeline items={developmetLifeCycle} baseUrl={baseUrl} />
         </div>
       </div>
     </div>
@@ -64,7 +51,7 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
               return (
                 <span
                   key={skillLabel}
-                  className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 bg-blue-100 text-slate-800 text-xs sm:text-sm font-medium"
+                  className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 border border-blue-700 bg-blue-50 text-slate-800 text-xs sm:text-sm font-medium"
                 >
                   {logoSrc ? (
                     <img
@@ -96,6 +83,7 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
       offset={offset}
       sectionClassName="bg-slate-50"
       mode={mode}
+      lgTwoColumnClass="lg:grid-cols-[0.45fr_0.55fr]"
     />
   );
 }

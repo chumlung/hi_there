@@ -10,6 +10,8 @@ export default function SectionWrapper({
   sectionClassName = "",
   mode = "desktop",
   mobileGridClassName = "grid-cols-1",
+  /** Large-screen two-column split (default 35% / 65%). Use e.g. lg:grid-cols-[0.4fr_0.6fr] for 40/60. */
+  lgTwoColumnClass = "lg:grid-cols-[0.35fr_0.65fr]",
 }) {
   if (mode === "mobile") {
     return (
@@ -49,7 +51,7 @@ export default function SectionWrapper({
       style={{ pointerEvents: opacity > 0.05 ? "auto" : "none", zIndex }}
     >
       <div
-        className={`mx-auto w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[0.35fr_0.65fr] lg:place-content-center items-center gap-8 md:gap-9 lg:gap-10 bg-white py-8 md:py-10 lg:py-0 ${sectionClassName} ${className}`}
+        className={`mx-auto w-full h-full overflow-hidden grid grid-cols-1 md:grid-cols-2 ${lgTwoColumnClass} lg:place-content-center items-center gap-8 md:gap-9 lg:gap-10 bg-white py-8 md:py-10 lg:py-0 ${sectionClassName} ${className}`}
       >
         <div
           className="min-w-0 transition-all duration-200 ease-out flex items-center justify-center"
