@@ -1,5 +1,6 @@
 import { developmetLifeCycle, skills } from "@src/data/resume";
 import SectionWrapper from "@components/common/SectionWrapper";
+import LabelPill from "@components/common/LabelPill";
 import DevelopmentTimeline from "@components/sections/skills/DevelopmentTimeline";
 
 export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
@@ -14,10 +15,10 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
       </div>
       <div className="text-sm sm:text-base leading-relaxed space-y-4 text-slate-800">
         <p>
-          My core expertise is in JavaScript and TypeScript.
+          For full stack development, my core expertise is in JavaScript and TypeScript.
         </p>
         <p className="text-blue-700 font-semibold">
-          Also, as a team lead, I have led teams across different timezones. <br/>I thrive in
+          Beyond code, I thrive in
         </p>
         <div className="mt-4">
           <DevelopmentTimeline items={developmetLifeCycle} baseUrl={baseUrl} />
@@ -34,37 +35,9 @@ export default function Skills({ ratio = 0, offset = 0, mode = "desktop" }) {
             {label}
           </h3>
           <div className="flex flex-wrap gap-2">
-            {items.map((item) => {
-              const { label: skillLabel, logoUrl } = item;
-              let logoSrc = null;
-              if (logoUrl) {
-                if (logoUrl.startsWith("http") || logoUrl.startsWith("/")) {
-                  logoSrc = logoUrl;
-                } else {
-                  logoSrc = `${baseUrl}${logoUrl.replace(/^\//, "")}`;
-                }
-              }
-
-              return (
-                <span
-                  key={skillLabel}
-                  className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 border border-blue-700 bg-blue-50 text-slate-800 text-xs sm:text-sm font-medium"
-                >
-                  {logoSrc ? (
-                    <img
-                      src={logoSrc}
-                      alt={`${skillLabel} logo`}
-                      className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white object-contain p-1"
-                    />
-                  ) : (
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white">
-                      {skillLabel[0]}
-                    </span>
-                  )}
-                  <span>{skillLabel}</span>
-                </span>
-              );
-            })}
+            {items.map((item) => (
+              <LabelPill key={item.label} label={item.label} logoUrl={item.logoUrl} />
+            ))}
           </div>
         </div>
       ))}

@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { projects } from "@src/data/resume";
+import { pillIcons, resumePdf, resumePdfHref } from "@src/data/pillIcons";
 import SectionWrapper from "@components/common/SectionWrapper";
-import Card from "@sections/projects/ProjectCard";
+import PillButton from "@components/common/PillButton";
+import ProjectCard from "@sections/projects/ProjectCard";
 import CardStack from "@components/common/CardStack";
 import useElementSize from "@src/hooks/useElementSize";
 
@@ -92,8 +94,16 @@ export default function Projects({
         I have an empathetic approach to a project and it's requirements.
       </p>
       <p className="text-blue-700 font-semibold">
-        I believe a project goes beyond the codebase, it's about the user experience, the business requirements and the team.
+        I believe a project means more than the codebase, it's encompasses the user experience, timely delivery and longetivity of the product.
         </p>
+      </div>
+      <div className="flex flex-wrap gap-6 items-center pt-1 m-2">
+        <PillButton
+          iconPath={pillIcons.resume}
+          label="Resume"
+          href={resumePdfHref()}
+          download={resumePdf.downloadFilename}
+        />
       </div>
     </div>
   );
@@ -121,7 +131,7 @@ export default function Projects({
                 stackProgress={effectiveProgress}
               >
                 {projects.map((project) => (
-                  <Card
+                  <ProjectCard
                     key={project.name}
                     name={project.name}
                     roles={project.roles}

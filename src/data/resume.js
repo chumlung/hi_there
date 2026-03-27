@@ -6,7 +6,7 @@ export const profile = {
 
 export const social = {
   email: "chumlung.khoyahang@gmail.com",
-  linkedInUrl: "https://www.linkedin.com/in/chumlunglimbu",
+  linkedInUrl: "https://www.linkedin.com/in/chumlung-limbu-8a67381aa",
   githubUrl: "https://github.com/chumlunglimbu",
 };
 
@@ -164,8 +164,8 @@ export const skills = [
 
 export const developmetLifeCycle = [
   {
-    title: "Understanding",
-    description: "the niche business requirements thorugh clear and concise conversations",
+    title: "Analyzing",
+    description: "the niche business requirements through clear and concise conversations",
     icon: "lens.svg"
   },
   {

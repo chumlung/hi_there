@@ -226,7 +226,7 @@ export default function Home() {
           <About mode="mobile" />
           <Skills mode="mobile" />
           <Projects mode="mobile" />
-          <Blogs mode="mobile" />
+          {/* <Blogs mode="mobile" /> */}
           <Contact mode="mobile" />
         </main>
       </div>
@@ -252,7 +252,7 @@ export default function Home() {
           <About mode="mobile" />
           <Skills mode="mobile" />
           <Projects mode="mobile" />
-          <Blogs mode="mobile" />
+          {/* <Blogs mode="mobile" /> */}
           <Contact mode="mobile" />
         </main>
       </div>
@@ -303,7 +303,7 @@ export default function Home() {
             offset={projectsOffset}
             stackProgress={projectsStackProgress}
           />
-          <Blogs ratio={sectionProgress.blogs} offset={blogsOffset} />
+          {/* <Blogs ratio={sectionProgress.blogs} offset={blogsOffset} /> */}
           <Contact ratio={sectionProgress.contact} offset={contactOffset} />
         </main>
       </div>

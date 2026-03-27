@@ -4,8 +4,8 @@ const NAV_LINKS = [
   { href: "#about", id: "about", label: "About" },
   { href: "#skills", id: "skills", label: "Skills" },
   { href: "#projects", id: "projects", label: "Projects" },
-  { href: "#blogs", id: "blogs", label: "Blogs" },
-  { href: "#contact", id: "contact", label: "Contact" },
+  // { href: "#blogs", id: "blogs", label: "Blogs" },
+  { href: "#contact", id: "contact", label: "Connect" },
 ];
 
 const LINE_COLOR = "#1e3a8a"; // blue-900
