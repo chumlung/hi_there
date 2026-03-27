@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { projects } from "@src/data/resume";
 import { pillIcons, resumePdf, resumePdfHref } from "@src/data/pillIcons";
 import SectionWrapper from "@components/common/SectionWrapper";
@@ -33,8 +33,55 @@ export default function Projects({
   const NAVBAR_HEIGHT_PX = 56; // matches mobile navbar padding + line-height
   const mobileAvailableHeight = Math.max(0, viewportHeight - NAVBAR_HEIGHT_PX - 24);
 
+  /** Upper bound for mobile card height (viewport); measured content is clamped to this. */
+  const mobileMaxCardHeight = useMemo(
+    () => Math.min(Math.max(320, Math.round(mobileAvailableHeight * 0.78)), 620),
+    [mobileAvailableHeight],
+  );
+
+  /** Used until off-screen measurement completes (avoids zero-height layout). */
+  const mobileFallbackCardHeight = useMemo(
+    () => Math.max(420, Math.min(mobileMaxCardHeight, 620)),
+    [mobileMaxCardHeight],
+  );
+
+  const mobileMeasureRef = useRef(null);
+  const [mobileMeasuredHeight, setMobileMeasuredHeight] = useState(null);
+
+  useLayoutEffect(() => {
+    if (!isMobile) return;
+
+    const root = mobileMeasureRef.current;
+    if (!root) return;
+
+    const measure = () => {
+      const nodes = root.querySelectorAll("[data-project-measure]");
+      let maxH = 0;
+      nodes.forEach((node) => {
+        maxH = Math.max(maxH, node.getBoundingClientRect().height);
+      });
+      if (maxH > 0) {
+        setMobileMeasuredHeight(Math.round(maxH));
+      }
+    };
+
+    measure();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(root);
+    root.querySelectorAll("[data-project-measure]").forEach((el) => ro.observe(el));
+    return () => ro.disconnect();
+  }, [isMobile, cardWidth, projects]);
+
   const cardHeight = isMobile
-    ? Math.max(420, Math.min(Math.round(mobileAvailableHeight * 0.78), 620))
+    ? mobileMeasuredHeight != null
+      ? Math.max(200, Math.min(mobileMeasuredHeight, mobileMaxCardHeight))
+      : mobileFallbackCardHeight
     : Math.max(320, Math.round(cardWidth * 0.94));
 
   const stackOffset = isMobile
@@ -79,7 +126,7 @@ export default function Projects({
       node.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [isMobile, transitions, progressStepDivisor]);
+  }, [isMobile, transitions, progressStepDivisor, cardHeight]);
 
   const left = (
     <div className="space-y-6 sm:space-y-8">
@@ -109,7 +156,35 @@ export default function Projects({
   );
 
   const right = (
-    <div ref={stackRef} className="w-full min-w-0">
+    <div ref={stackRef} className="w-full min-w-0 relative">
+      {isMobile && (
+        <div
+          ref={mobileMeasureRef}
+          className="fixed pointer-events-none opacity-0 -z-10 top-0"
+          style={{ left: -10000, width: cardWidth }}
+          aria-hidden
+        >
+          <div style={{ width: cardWidth }}>
+            {projects.map((project) => (
+              <div
+                key={`measure-${project.name}`}
+                data-project-measure
+                className="rounded-3xl overflow-hidden border border-slate-200 bg-white px-4 py-4 shadow-2xl box-border"
+                style={{ width: cardWidth }}
+              >
+                <ProjectCard
+                  name={project.name}
+                  roles={project.roles}
+                  description={project.description}
+                  industryDomain={project.industryDomain}
+                  siteUrl={project.siteUrl}
+                  keyContributions={project.keyContributions}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {isMobile ? (
         <div
           ref={stackScrollRef}
@@ -155,7 +230,7 @@ export default function Projects({
           stackProgress={effectiveProgress}
         >
           {projects.map((project) => (
-            <Card
+            <ProjectCard
               key={project.name}
               name={project.name}
               roles={project.roles}

@@ -98,7 +98,7 @@ export default function CardStack({
           return (
             <div
               key={index}
-              className={`absolute rounded-3xl overflow-hidden border px-4 py-4 sm:px-5 sm:py-4 lg:px-6 lg:py-5 ${
+              className={`absolute rounded-3xl overflow-hidden border ${
                 shouldAnimate ? "transition-all duration-300 ease-out" : ""
               } ${
                 isTopCard || relativeIndex === 1
@@ -123,10 +123,13 @@ export default function CardStack({
                   }}
                 />
               )}
-              {child}
-              {isTopCard && (
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/95 to-transparent" />
-              )}
+              {/* Fixed layout width so text does not reflow as renderWidth animates */}
+              <div
+                className="absolute left-1/2 top-0 z-[1] box-border h-full -translate-x-1/2 overflow-hidden px-4 py-4 sm:px-5 sm:py-4 lg:px-6 lg:py-5"
+                style={{ width: `${cardWidth}px` }}
+              >
+                {child}
+              </div>
             </div>
           );
         })}
